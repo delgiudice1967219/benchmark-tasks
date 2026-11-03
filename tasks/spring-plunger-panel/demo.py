@@ -53,6 +53,7 @@ OPEN_AT = PULL_AT + PULL_S
 OPEN_S = 5.0
 OPEN_TO = math.radians(41.0)
 RELEASE_AT = 0.12     # rad: the left hand lets go once the panel is this far open (the strike is clear of the pin)
+RELEASE_S = 1.0       # the left gripper opens over this long: within inspect-robots' default limit of 5% per step
 LATE_RELEASE_DELAY_S = 0.6
 HOLD_AFTER_S = 1.5
 
@@ -187,9 +188,10 @@ class Scripted:
             grip = 1.0 - closing
             if self.released_at is not None:
                 age = t - self.released_at
-                grip = _ramp(age / 0.3)
+                grip = _ramp(age / RELEASE_S)
                 # Back off along the approach, then up and away from the panel's path.
-                knob = knob + [0.0, 0.06 * _smooth((age - 0.3) / 0.8), 0.04 * _smooth((age - 1.1) / 0.8)]
+                knob = knob + [0.0, 0.06 * _smooth((age - RELEASE_S) / 0.8),
+                               0.04 * _smooth((age - RELEASE_S - 0.8) / 0.8)]
             if tau < MOVE_IN_S:
                 knob = self.pregrasp["left"] + _smooth(tau / MOVE_IN_S) * (knob - self.pregrasp["left"])
             L.to(knob, KNOB_GRIP)

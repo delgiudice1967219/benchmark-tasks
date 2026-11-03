@@ -4,8 +4,9 @@ A small cabinet's hinged front panel is held shut by a spring plunger: the plung
 lug on the panel's free edge, and its spring pushes the pin back the moment the red knob is let go. To open the panel,
 one hand keeps the knob pulled back about 12 mm until the strike has swung clear of the pin, while the other hand pulls
 the panel open by its handle. Pulling the latched panel gets nowhere, and letting go of the knob before the strike has
-cleared re-latches it. The instruction is only "Open the panel.": the plunger, and when to let it go, are for the
-policy to notice.
+cleared re-latches it. The instruction names the panel, the plunger's red knob and the angle that counts; that one
+hand must keep the knob back while the other swings the panel open, and when to let go, are for the policy to work
+out.
 
 The task runs on Dream's YAM station in Isaac Lab-Arena (`yam_arena`), the simulation of the program's walkthrough.
 
@@ -29,7 +30,8 @@ install's `yam.env` is), from this folder:
 ```bash
 inspect-robots run --embodiment yam_arena --policy dream \
   -E task=task.py -E object_jitter=0 -E control_hz=20 -E cam_width=320 -E cam_height=176 \
-  --instruction "Open the panel." --scorer task_score --max-steps 600 --store-frames --log-dir ~/yam-eval/panel-dream
+  --instruction "Open the teal panel on the grey cabinet so that it stands open 37 degrees or more. A spring plunger locks it: pulling its red knob draws the pin back." \
+  --scorer task_score --max-steps 600 --store-frames --log-dir ~/yam-eval/panel-dream
 ```
 
 `task_score` prints the trial's score: 1.0 on success (the panel open 37 degrees or more for 1 s, the latch never
@@ -43,8 +45,8 @@ python demo.py --policy hold pull_only early_release --out runs/controls --no-vi
 python -m pytest -q                                                   # both test files
 ```
 
-- **Runtime per trial:** about 1 to 1.5 minutes for the full 600 steps on one RTX PRO 6000 Blackwell shared with
-  other jobs, rendering the three cameras at 640 x 360. Isaac Sim takes about 30 s to start, and about 5 minutes the
+- **Runtime per trial:** about 1 to 2.5 minutes for the full 600 steps on one RTX PRO 6000 Blackwell shared with
+  other jobs (depending on their load), rendering the three cameras at 640 x 360. Isaac Sim takes about 30 s to start, and about 5 minutes the
   first time on a new install, while it compiles its shaders. A Dream-1 trial adds the model's round trips.
 - **Seeds:** none. The layout is fixed (`-E object_jitter=0`; the cabinet is a fixed object, which yam_arena never
   jitters).

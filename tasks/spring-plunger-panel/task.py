@@ -5,7 +5,7 @@ strike lug on the panel's free edge, and its spring pushes the pin back in whene
 of the cabinet, is let go. Pulling the knob about 12 mm to the left frees the panel. Nothing else is on the table.
 
 Run it:  inspect-robots run --embodiment yam_arena -E task=task.py -E object_jitter=0 -E control_hz=20 \\
-           --instruction "Open the panel." --scorer task_score --max-steps 600 ...
+           --instruction "<INSTRUCTION, below>" --scorer task_score --max-steps 600 ...  (in full in README.md)
 Demo:    python demo.py --out runs/demo
 """
 
@@ -24,7 +24,8 @@ from yam_arena.task_file import TABLE_TOP  # noqa: E402
 SCENE = "station"
 SCORE_OVER = "end"  # the panel's angle when the run ends counts
 SUCCESS_HOLD_S = 1.0
-INSTRUCTION = "Open the panel."
+INSTRUCTION = ("Open the teal panel on the grey cabinet so that it stands open 37 degrees or more. A spring "
+               "plunger locks it: pulling its red knob draws the pin back.")
 TOP = TABLE_TOP[SCENE]
 ORIGIN = (0.0, 0.0, TOP)  # the mechanism's frame: on the table top, midway between the arm bases; x forward, y left
 
