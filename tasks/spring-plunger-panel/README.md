@@ -17,10 +17,11 @@ The task runs on Dream's YAM station in Isaac Lab-Arena (`yam_arena`), the simul
 | `task.py` | The yam_arena task file: the cabinet, the scorer (`score`, `success`) and the check for a forced latch |
 | `mechanism.py` | Lets a task file hold a jointed object: the cabinet becomes one fixed articulation with a hinge and a spring plunger |
 | `demo.py` | Scripted policies: the full-score demo and three controls; writes the videos, the screenshot and the results |
-| `tests/` | `test_task_file.py` needs no simulator (geometry, clearances, scoring); `test_isaac.py` runs the demo and controls in Isaac Sim |
+| `tests/` | `test_task_file.py` needs no simulator (geometry, clearances, scoring); `test_isaac.py` runs the demo and controls in Isaac Sim, and the demo on the Dream-1 command path (`eval_path.py`: `inspect_robots.eval` with the CLI's default guardrails, no model called) |
 
 `mechanism.py` hooks `yam_arena` when the task file is loaded, without modifying it, so the task runs with the standard
-`yam_arena` embodiment, the `dream` policy and the `task_score` scorer.
+`yam_arena` embodiment, the `dream` policy and the `task_score` scorer. It also records the top camera when
+`TOP_CAM_VIDEO` is set (below); the videos of the submission are recorded this way, the demo's and the Dream-1 run's.
 
 ## Run a trial
 
@@ -28,6 +29,7 @@ In the Isaac Lab-Arena environment of the simulation walkthrough (`source ~/Isaa
 install's `yam.env` is), from this folder:
 
 ```bash
+TOP_CAM_VIDEO=~/yam-eval/panel-dream/dream.mp4 \
 inspect-robots run --embodiment yam_arena --policy dream \
   -E task=task.py -E object_jitter=0 -E control_hz=20 -E cam_width=320 -E cam_height=176 \
   --instruction "Open the teal panel on the grey cabinet so that it stands open 37 degrees or more. A spring plunger locks it: pulling its red knob draws the pin back." \
@@ -35,7 +37,10 @@ inspect-robots run --embodiment yam_arena --policy dream \
 ```
 
 `task_score` prints the trial's score: 1.0 on success (the panel open 37 degrees or more for 1 s, the latch never
-forced), otherwise `score()` at the end of the episode.
+forced), otherwise `score()` at the end of the episode. With `TOP_CAM_VIDEO` set, the task records the station's top
+camera at its full 640 x 360 (the model gets it at 320 x 176): `dream.mp4`, one frame at the start and one per
+control step, and `dream.png`, its first frame. `inspect-robots video` makes the per-camera videos at 320 x 176 from
+the stored frames, as usual.
 
 The scripted demo and the controls:
 

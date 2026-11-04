@@ -11,7 +11,9 @@ Importing this module hooks yam_arena without modifying it:
 - ``yam_arena.scene.task_object`` builds a ``Mechanism`` as an articulation (other objects as before);
 - ``yam_arena.scene.object_states`` reports a ``MechanismState`` for it;
 - after ``YamArenaEmbodiment.reset`` returns, every mechanism's joints are put back to 0 at rest, its spring
-  targets are set, the scene settles again as the reset does, and functions registered with :func:`on_reset` run.
+  targets are set, the scene settles again as the reset does, and functions registered with :func:`on_reset` run;
+- with the environment variable ``TOP_CAM_VIDEO=path.mp4`` set, the top camera of each episode is recorded there
+  at its full render size (see :class:`_TopCamRecorder`).
 
 The modules are patched when they are imported (or at once, if they already are). Nothing here imports Isaac Sim
 at import time, so a task file that uses it still loads before the simulator starts.
@@ -19,16 +21,18 @@ at import time, so a task file that uses it still loads before the simulator sta
 
 from __future__ import annotations
 
+import atexit
 import importlib.abc
 import importlib.util
 import math
+import os
 import sys
 from dataclasses import dataclass, field
 
 import numpy as np
 from yam_arena.task_file import Box, ObjectState
 
-__all__ = ["Shape", "Link", "Joint", "Mechanism", "MechanismState", "on_reset", "install"]
+__all__ = ["Shape", "Link", "Joint", "Mechanism", "MechanismState", "on_reset", "install", "top_cam_frame"]
 
 Color = tuple[float, float, float]
 AXES = ("X", "Y", "Z")
@@ -389,30 +393,96 @@ def _patch_scene(scene) -> None:
     scene._mechanism_patched = True
 
 
+TOP_CAM_VIDEO = "TOP_CAM_VIDEO"  # environment variable: record the top camera to this MP4
+
+
+def top_cam_frame(embodiment) -> np.ndarray:
+    """The station top camera's latest render at its full size (640 x 360), before yam_arena resizes it for the
+    policy's observation."""
+    out = embodiment._base.scene["top_cam"].data.output["rgb"]
+    out = out.torch if hasattr(out, "torch") else out
+    return np.ascontiguousarray(out[0, ..., :3].cpu().numpy(), dtype=np.uint8)
+
+
+class _TopCamRecorder:
+    """With ``TOP_CAM_VIDEO=path.mp4`` set, each episode's top camera is written to that H.264 MP4 at the control rate:
+    the frame at the reset, then one per control step, at the camera's full render size whatever the policy's
+    ``cam_width`` / ``cam_height``. The first frame is also saved beside it as ``path.png`` (the setup screenshot).
+    The variable is read at each reset, so one process can record several episodes to different files."""
+
+    def __init__(self) -> None:
+        self.writer, self._exit_hook = None, False
+
+    def start(self, embodiment) -> None:
+        self.close()
+        path = os.environ.get(TOP_CAM_VIDEO)
+        if not path:
+            return
+        import imageio.v2 as imageio
+        import imageio_ffmpeg
+
+        path = os.path.abspath(os.path.expanduser(path))
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        frame = top_cam_frame(embodiment)
+        imageio.imwrite(os.path.splitext(path)[0] + ".png", frame)
+        h, w = frame.shape[:2]
+        hz = round(1.0 / embodiment._base.step_dt, 6)
+        self.writer = imageio_ffmpeg.write_frames(
+            path, (w, h), pix_fmt_in="rgb24", pix_fmt_out="yuv420p", fps=hz, quality=None, codec="libx264",
+            macro_block_size=8, output_params=["-crf", "20", "-movflags", "+faststart"])
+        self.writer.send(None)
+        self.writer.send(frame)
+        if not self._exit_hook:  # registered after yam_arena's (at the simulator's start), so it runs before Kit closes
+            atexit.register(self.close)
+            self._exit_hook = True
+
+    def add(self, embodiment) -> None:
+        if self.writer is not None:
+            self.writer.send(top_cam_frame(embodiment))
+
+    def close(self) -> None:
+        if self.writer is not None:
+            writer, self.writer = self.writer, None
+            writer.close()
+
+
+_RECORDER = _TopCamRecorder()
+
+
 def _patch_embodiment(module) -> None:
     cls = module.YamArenaEmbodiment
     if getattr(cls, "_mechanism_patched", False):
         return
-    reset = cls.reset
+    reset, step, close = cls.reset, cls.step, cls.close
 
     def patched_reset(self, scene, *, seed=None):
         observation = reset(self, scene, seed=seed)
         specs = [o for o in (self.task.objects if self.task is not None else ()) if isinstance(o, Mechanism)]
-        if not specs:
-            return observation
-        for spec in specs:
-            _rest(self._env, _SPECS.get(spec.name, spec))
-        base = self._base
-        for _ in range(max(1, round(module.SETTLE_S / base.step_dt))):  # settle again, as the reset does
-            self._env.step(self._ready)
-        for _ in range(module.RESET_RENDERS):
-            base.sim.render()
-        self._t = 0.0
-        for fn in _RESET:
-            fn()
-        return self._observation()
+        if specs:
+            for spec in specs:
+                _rest(self._env, _SPECS.get(spec.name, spec))
+            base = self._base
+            for _ in range(max(1, round(module.SETTLE_S / base.step_dt))):  # settle again, as the reset does
+                self._env.step(self._ready)
+            for _ in range(module.RESET_RENDERS):
+                base.sim.render()
+            self._t = 0.0
+            for fn in _RESET:
+                fn()
+            observation = self._observation()
+        _RECORDER.start(self)
+        return observation
 
-    cls.reset = patched_reset
+    def patched_step(self, action):
+        result = step(self, action)
+        _RECORDER.add(self)
+        return result
+
+    def patched_close(self):
+        _RECORDER.close()
+        return close(self)
+
+    cls.reset, cls.step, cls.close = patched_reset, patched_step, patched_close
     cls._mechanism_patched = True
 
 

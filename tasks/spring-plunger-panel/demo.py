@@ -19,8 +19,9 @@ The controls show that the panel can't be opened by force or with bad timing:
 Like ``yam_scripted``, the policies read the simulator's state (here the panel's angle and the plunger's travel) and
 plan with IK on the arm's URDF; they only ever send the 14 joint and gripper targets of yam_arena's action.
 Each policy runs one episode of the task (Isaac Sim starts once for all of them) and writes ``<policy>.json``, and
-with video, ``<policy>.mp4`` (the top camera with both wrist cameras beside it) and ``setup.png`` (the top camera's
-first frame).
+with video, ``<policy>.mp4``: the station's top camera at its full 640 x 360, one frame at the start and one per
+control step, recorded as the Dream-1 run is (``TOP_CAM_VIDEO``, see ``mechanism.py``), and ``setup.png``, its first
+frame.
 """
 
 from __future__ import annotations
@@ -28,6 +29,8 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import os
+import shutil
 import sys
 import time
 from pathlib import Path
@@ -204,46 +207,24 @@ class Scripted:
         return self.variant == "demo" and self.end is not None and t >= self.end
 
 
-def _compose(images: dict) -> np.ndarray:
-    """The top camera with the left and right wrist cameras stacked beside it, at half its size."""
-    import cv2
-
-    top = images["top_cam"]
-    h, w = top.shape[:2]
-    side = [cv2.resize(images[k], (w // 2, h // 2)) for k in ("left_cam", "right_cam")]
-    return np.concatenate([top, np.concatenate(side, axis=0)], axis=1)
-
-
-def _writer(path: Path, frame: np.ndarray):
-    import imageio_ffmpeg
-
-    h, w = frame.shape[:2]
-    gen = imageio_ffmpeg.write_frames(str(path), (w, h), pix_fmt_in="rgb24", pix_fmt_out="yuv420p", fps=CONTROL_HZ,
-                                      quality=None, codec="libx264", macro_block_size=8,
-                                      output_params=["-crf", "20", "-movflags", "+faststart"])
-    gen.send(None)
-    return gen
-
-
 def run_episode(emb, policy: str, out: Path, max_steps: int, video: bool, write_setup: bool) -> dict:
     from inspect_robots import Scene
     from inspect_robots.types import Action
     from inspect_robots_yam.packing import pack
 
+    import mechanism  # the module task.py loaded (task.py puts this folder on sys.path)
+
     task = emb.task.module
     started = time.time()
-    obs = emb.reset(Scene(id=f"spring-panel-{policy}", instruction=task.INSTRUCTION))
+    if video:  # the top camera, recorded from the reset on (mechanism.py)
+        os.environ[mechanism.TOP_CAM_VIDEO] = str(out / f"{policy}.mp4")
+    else:
+        os.environ.pop(mechanism.TOP_CAM_VIDEO, None)
+    emb.reset(Scene(id=f"spring-panel-{policy}", instruction=task.INSTRUCTION))
     from yam_arena.scene import object_states  # importable once the simulator runs
 
-    if write_setup:
-        import imageio.v2 as imageio
-
-        imageio.imwrite(out / "setup.png", obs.images["top_cam"])
-    writer = None
-    if video:
-        first = _compose(obs.images)
-        writer = _writer(out / f"{policy}.mp4", first)
-        writer.send(np.ascontiguousarray(first))
+    if video and write_setup:
+        shutil.copyfile(out / f"{policy}.png", out / "setup.png")
     script = Scripted(task, policy)
     steps, success, info, first_full, max_travel = 0, False, {}, None, 0.0
     trace = []  # per step: time (s), panel angle (deg), plunger travel (mm), score, left and right grip commands
@@ -261,16 +242,13 @@ def run_episode(emb, policy: str, out: Path, max_steps: int, video: bool, write_
                           float(info.get("score", 0.0) or 0.0), round(float(action[6]), 3), round(float(action[13]), 3)])
             if first_full is None and float(info.get("score", 0.0) or 0.0) >= 1.0:
                 first_full = steps
-            if writer is not None:
-                writer.send(np.ascontiguousarray(_compose(result.observation.images)))
             if result.terminated:
                 success = result.termination_reason == "success"
                 break
             if script.done(t):
                 break
     finally:
-        if writer is not None:
-            writer.close()
+        mechanism._RECORDER.close()
     joints = object_states(emb._env, ["cabinet"])["cabinet"].joints
     record = task.episode()
     out_json = {
