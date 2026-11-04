@@ -15,5 +15,5 @@
   "run_limit": "600 steps (30 seconds at 20 Hz)",
   "reset_notes": "Mark the cabinet's outline on the table before the first trial. Between trials: pull the knob, close the panel and let the knob go; a light tug on the handle must not open it. Return both arms to the start pose.",
   "fidelity": "Approximate. Isaac Sim 6.1 PhysX at 240 Hz (Isaac Lab-Arena 0.3.1, yam_arena station); each 20 Hz target is held for 12 steps. Rigid boxes, cylinders and a capsule on one fixed articulation: a hinge (0.025 N m friction) and a 14 mm plunger slide with a 150 N/m spring preloaded to 0.3 N. The bore is square. Stroke, spring, friction and sizes are nominal, not measured. The pin over 1 mm inside the strike (from the joint positions, each step) counts as forced: 0.",
-  "scores": "Dream-1 run: pending; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0"
 }

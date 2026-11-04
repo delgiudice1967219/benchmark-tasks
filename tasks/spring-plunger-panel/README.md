@@ -109,6 +109,12 @@ The controls show that the score can't be had by forcing or by mistiming:
 - `early_release`: the left hand pulls the pin fully back, then lets go while the panel is still shut; 0.6 s later the
   right hand runs the same opening. The pin is already back in the strike: the panel stops at 0.13 degrees. Score 0.
 
+## The Dream-1 run
+
+One trial of `dreamlabs/dream-1-beta` with the command under "Run a trial" (12 requests of 48 steps): **score 0**.
+Both arms reach toward the cabinet, the left hand to the plunger's knob and the right hand to the panel, but the
+pin is never drawn back and the panel stays shut for the whole 600 steps.
+
 ## Real-world build and reset
 
 - **Cabinet:** a 17 x 28 x 20 cm box of 10 mm plywood, open at the front, on a 16 x 28 x 9 cm plinth, clamped to the
