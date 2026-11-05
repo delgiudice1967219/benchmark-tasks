@@ -15,5 +15,6 @@
   "run_limit": "2,400 steps (120 seconds at 20 Hz)",
   "reset_notes": "Put the cubes back on their marks in the bin; arms to the start pose. A person (or a mannequin arm on a slide) reaches over the bin at 9.5 s and 50 s after the start and pulls back 6.5 s later, cued by a timer; keep the reach slow (12 cm/s). Nothing is consumed.",
   "fidelity": "Approximate. Isaac Sim 6.1 PhysX at 240 Hz (Isaac Lab-Arena 0.3, yam_arena station); each 20 Hz target is held for 12 steps. Rigid boxes. The person is a rigid mannequin forearm on a prismatic joint driven to a fixed timetable; it moves level, without a person's arc or hesitation. Distances are from forward kinematics of the measured joints to the hand's box. Masses and friction are nominal.",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-2SJPXK"
 }
