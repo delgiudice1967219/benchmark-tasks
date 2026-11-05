@@ -15,5 +15,6 @@
   "run_limit": "2,400 steps (120 seconds at 20 Hz)",
   "reset_notes": "Put the cubes back on their marks on the mats and the paddle flat; arms to the start pose. The person (or a servo) raises the paddle at 10 s and 45 s after the start and lowers it 7 s later, cued by a timer. Nothing is consumed.",
   "fidelity": "Approximate. Isaac Sim 6.1 PhysX at 240 Hz (Isaac Lab-Arena 0.3, yam_arena station); each 20 Hz target is held for 12 steps. Rigid boxes and cylinders. The paddle is a revolute joint driven to a fixed timetable, standing in for a person raising it. Arm motion is measured from forward kinematics of the measured joints. Masses and friction are nominal.",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-LNTF2X"
 }
