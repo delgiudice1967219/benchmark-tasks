@@ -15,5 +15,6 @@
   "run_limit": "2,400 control steps (120 seconds at 20 Hz).",
   "reset_notes": "Use a fresh intact sweet and wrapper with the same dimensions and twists. Place the overlap seam down, align the stripe and tails to the setup photograph, clean the worktop, and reset both arms. Verify on a separate hands-off trial of the full duration that neither end untwists 90 degrees by itself and the sweet stays inside.",
   "fidelity": "Native rigid candy and a continuous deformable film with self-contact and gripper contact. The rounded visual mesh lies inside the convex collision hull. A formed rest mesh approximates retained twists and springback. Film bending and contact friction are approximate. The model has fixed topology and a rigid sweet, so it does not model tears, fracture, or sticky residue. Inspect these on the physical item.",
-  "scores": "Dream-1: 0.00; scripted demo: 1.00."
+  "scores": "Dream-1: 0.00; scripted demo: 1.00.",
+  "media": "M-G5NPJM"
 }
