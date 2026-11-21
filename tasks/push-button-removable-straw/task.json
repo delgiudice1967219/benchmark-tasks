@@ -15,7 +15,7 @@
   "action_limit": 750,
   "run_limit": "750 control steps (37.5 seconds at 20 Hz).",
   "reset_notes": "Use the same clean, intact bottle and straw without liquid. Seat the straw in its guide. Close the transparent lid until its catch holds, fold the security ring down and place the bottle back at the marked position. Restore the arms to their open ready pose and verify the setup photo.",
-  "fidelity": "MuJoCo with a freely supported bottle, passive ring interlock and button catch, spring hinge, freely removable straw, reciprocal seated compression spring and three compliant radial retainers. Native contact drives the manipulation. The installed assembly uses the catalog size class and mass. The full straw span is estimated from the catalog's exploded view. Internal geometry, spring and fit forces, surface friction and detailed inertia allocation are engineering estimates. The carry strap, filter, fracture and liquid behavior are outside this simulation.",
+  "fidelity": "MuJoCo uses physical contact with a free bottle, passive ring interlock and button catch, sprung lid and removable straw with compliant retainers. The 148 mm straw is estimated from the catalog image. Spring and fit forces, friction and inertia are estimates. The model omits the strap, filter, liquid and fracture.",
   "scores": "Dream-1 scored 0.00 in 750 actions. Scripted demo scored 1.00 in 564 actions.",
   "media": "M-XGJZFD"
 }
