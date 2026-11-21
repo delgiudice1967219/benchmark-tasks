@@ -1,0 +1,21 @@
+{
+  "title": "Replace a DualSense Edge stick module",
+  "category": "Societal relatability",
+  "keywords": [
+    "bimanual repair",
+    "game controller",
+    "release latch",
+    "removable face cover",
+    "stick module"
+  ],
+  "instruction": "Replace the faulty right stick module with the spare and secure the front cover. Leave the controller face up on the worktop.",
+  "context": "A stick that drifts or stops responding can be replaced to keep an otherwise functioning game controller in use. The robot has to stabilize the loose controller, release and preserve the front cover, work the module retaining lever, and seat the replacement before closing the cover.",
+  "setup": "One unplugged, powered-off Sony DualSense Edge controller (CFI-ZCP1, approximately 160 by 106 by 66 mm and 325 g), with the original module and front cover locked in place. The rigid plastic shell and cover house rubberized thumbsticks and a metal release lever. One stock-compatible upright spare module (approximately 30 by 40 by 31 mm and 15 g). Place the controller front down, handle ends toward the arms, 34.3 cm in front of the arm-base line and 2.2 cm toward the left arm from its midpoint. Set the spare upright 31.4 cm in front of the line and 9.8 cm toward the right arm from the midpoint. The two YAM bases are 61 cm apart. Use the 110 by 130 by 6 cm rigid laminate tabletop, 76 cm above the floor, with the stock three calibrated cameras. Start both parallel grippers open and clear of the controller.",
+  "scoring": "Award 0 if the robot damages any part or any component falls from the table. Otherwise award 0.20 after the rear release is operated and the face cover is separated by at least 4.2 cm from its fitted position. Raise to 0.45 if the module retaining lever is lifted by at least 59 degrees and the original module is removed by its guide and ends at least 6.4 cm from its socket. Raise to 0.75 when the spare is slid into the same guide and its case is seated within 2 mm of the stock stop. Award 1.0 when the module lever is lowered, the front cover is secure with a seam at most 1 mm above the reference fit, and the face-up controller and original module rest separately on the table with both gripper pinch points at least 9 cm from the controller throughout the final second. Use the fixed close video for the sequence, a ruler or marked reference photo for fit, and inspect the clip and parts at the end. Award 0 to every other outcome that meets no partial milestone.",
+  "action_limit": 2400,
+  "run_limit": "2,400 control steps (120 seconds at 20 Hz).",
+  "reset_notes": "Return the original module to its guide, lower the module lever, and refit the stock front cover until secured. Confirm that the controller is powered off and unplugged. Place it and the spare at their setup positions with both arms open in ready. Follow Sony’s instructions for static discharge and keep clear of exposed connectors.",
+  "fidelity": "MuJoCo uses the calibrated YAM station and physical contact for the free controller, cover and modules. A contact-gated clip retains the measured fitted cover without changing its pose. Guide clearances, plastic friction and spring forces are estimates. The model omits connector continuity, fracture and electrostatic damage.",
+  "scores": "Dream-1: 0.00; scripted demo: 1.00.",
+  "media": "M-PSFCJW"
+}

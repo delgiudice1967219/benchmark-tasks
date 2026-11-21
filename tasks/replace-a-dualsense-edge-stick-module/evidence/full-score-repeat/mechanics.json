@@ -1,0 +1,37 @@
+{
+  "capture": {
+    "first_observed_step": 2004,
+    "relative_position_mm": [
+      -0.8048340335816566,
+      8.370015115537818,
+      36.21742052143437
+    ],
+    "relative_angle_deg": 2.8655009807829166,
+    "clip_translation_mm": [
+      -0.8052721868432444,
+      8.322050165973874,
+      36.2130010563933
+    ],
+    "clip_translation_difference_from_nominal_mm": 1.0739873008485785
+  },
+  "final_removed_module_clearance_mm": 100.13469641354331,
+  "final_gripper_distance_mm": [
+    441.12044963442213,
+    374.3739011220694
+  ],
+  "score": {
+    "score": 1.0,
+    "cover_unlocked": true,
+    "cover_removed": true,
+    "lever_opened": true,
+    "original_removed": true,
+    "replacement_seated": true,
+    "cover_relatched": true,
+    "original_guide_travel": true,
+    "replacement_guide_travel": true,
+    "final_hold_s": 3.5919999999997154,
+    "violation": false,
+    "latch_mm": -0.8254802563878306,
+    "lever_deg": -0.03588981662623042
+  }
+}

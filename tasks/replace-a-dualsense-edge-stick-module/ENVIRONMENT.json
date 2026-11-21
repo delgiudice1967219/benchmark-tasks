@@ -1,0 +1,21 @@
+{
+  "engine": {"name": "MuJoCo", "version": "3.11.0", "control_hz": 20, "physics_hz": 1000},
+  "python": "3.12.12",
+  "libraries": {"numpy": "2.3.1", "scipy": "1.17.0", "opencv-python-headless-noffmpeg": "4.14.0.94rc1"},
+  "station": {
+    "distribution": "dreamlabs==1.0.23",
+    "module": "dream_examples.yam_mujoco.yam_env",
+    "calibration": "assets/sim-eval-yam.json"
+  },
+  "policy": {
+    "inspect-robots": "0.60.0",
+    "inspect-robots-yam": "0.37.0",
+    "inspect-robots-dream": "0.1.0",
+    "dreamlabs-client": "1.0.14",
+    "request_rows": 8,
+    "preroll_steps": 100,
+    "camera_resolution": [320, 176]
+  },
+  "rendering": "Mesa software EGL, FFmpeg H.264 yuv420p",
+  "reset": "Fixed controller, module, cover, and robot reset. No random sampling."
+}

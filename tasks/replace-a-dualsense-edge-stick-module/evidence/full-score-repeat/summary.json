@@ -1,0 +1,37 @@
+{
+  "score": 1.0,
+  "cover_unlocked": true,
+  "cover_removed": true,
+  "lever_opened": true,
+  "original_removed": true,
+  "replacement_seated": true,
+  "cover_relatched": true,
+  "original_guide_travel": true,
+  "replacement_guide_travel": true,
+  "final_hold_s": 3.5919999999997154,
+  "violation": false,
+  "latch_mm": -0.8254802563878306,
+  "lever_deg": -0.03588981662623042,
+  "action_count": 2212,
+  "failure": null,
+  "mode": "full",
+  "control_hz": 20,
+  "peak_effort_nm": [
+    [
+      14.340169726139123,
+      10.124090347012157,
+      7.63928686119084,
+      7.0,
+      7.0,
+      7.0
+    ],
+    [
+      15.478487415943647,
+      21.367892632375998,
+      12.756388338526946,
+      7.0,
+      7.0,
+      7.0
+    ]
+  ]
+}

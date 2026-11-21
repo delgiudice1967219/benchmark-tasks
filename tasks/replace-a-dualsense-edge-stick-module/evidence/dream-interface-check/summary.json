@@ -1,0 +1,29 @@
+{
+  "task": "dualsense-stick-module",
+  "instruction": "Replace the faulty right stick module with the spare and secure the front cover. Leave the controller face up on the worktop.",
+  "planned_actions": 8,
+  "rate_hz": 20,
+  "actions": 8,
+  "requests": 0,
+  "status": "complete",
+  "engine": "MuJoCo",
+  "offline_check": true,
+  "model_attempted": false,
+  "grading": {
+    "score": 0.0,
+    "cover_unlocked": false,
+    "cover_removed": false,
+    "lever_opened": false,
+    "original_removed": false,
+    "replacement_seated": false,
+    "cover_relatched": false,
+    "original_guide_travel": false,
+    "replacement_guide_travel": false,
+    "final_hold_s": 0.0,
+    "violation": false,
+    "latch_mm": 0.0005472464479928433,
+    "lever_deg": -0.18875664089227945
+  },
+  "simulated_s": 0.4,
+  "wall_seconds": 1.0355993389966898
+}
