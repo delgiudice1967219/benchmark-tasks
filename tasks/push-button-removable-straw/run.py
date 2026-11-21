@@ -165,7 +165,7 @@ class Trial:
         print("Straw grip",self.physics.report(),flush=True)
         hold_tcp=self.tcp(1)
         axis=self.d.body("bottle").xmat.reshape(3,3)[:,2].copy()
-        for height in (.011,.023,.038,.058,.078,.099,.113):
+        for height in (.011,.023,.038,.058,.078,.099,.121,.142,.158,.172):
             self.move(1,hold_tcp+axis*height,.46,"pull straw straight out of the guide")
             if self.physics.extracted:
                 break

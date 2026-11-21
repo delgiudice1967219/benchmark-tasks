@@ -24,7 +24,13 @@ RELEASE_TRAVEL = .0045
 GUIDE_TOP = .155
 STRAW_COMPRESSED = .146
 STRAW_RISE = .016
-STRAW_LENGTH = .093
+# Estimate the span from the catalog's exploded view and keep the inlet
+# 9 mm above the base of the vessel when the lid compresses the mouthpiece.
+STRAW_SPAN = .148
+STRAW_MOUTH_Z = .011
+STRAW_INLET_Z = STRAW_MOUTH_Z - STRAW_SPAN
+EXTRACTION_START_MAX = STRAW_COMPRESSED + STRAW_RISE + STRAW_INLET_Z + .015
+EXTRACTION_MIN_LIFT = .120
 MINT = (.62, .75, .60, 1.)
 DARK = (.36, .48, .34, 1.)
 CLEAR = (.62, .77, .82, .25)
@@ -118,8 +124,8 @@ def build():
     housing.attrib.update(pos=top.get("pos"), quat=top.get("quat"))
     # Fixed 34 mm reference lens. Retarget the side view to this taller
     # manipulation zone in the Dream reference frame.
-    center = ORIGIN + np.array((-.043, .006, .141))
-    eye_offset = 1.08 * np.asarray((-.527, -.374, .373))
+    center = ORIGIN + np.array((-.043, .006, .176))
+    eye_offset = 1.14 * np.asarray((-.527, -.374, .373))
     yam_env.camera(w, "judging_front", center + eye_offset, center)
     fovy = np.degrees(2. * np.arctan(20.955 * 480 / (2. * 34. * 640)))
     w.find("camera[@name='judging_front']").set("fovy", str(fovy))
@@ -208,18 +214,21 @@ def build():
     # Its spring collar is a physical contact surface for withdrawing the cassette.
     straw = body(w, "straw", ORIGIN + (0,0,STRAW_COMPRESSED))
     ET.SubElement(straw, "freejoint", name="straw_free")
-    geom(straw, "straw_grip_surface", "cylinder", (.00415,.011), (0,0,0), STRAW_COLOR,
+    geom(straw, "straw_grip_surface", "cylinder", (.00415,STRAW_MOUTH_Z), (0,0,0), STRAW_COLOR,
          mass=".0027", friction="1.10 .012 .001")
-    geom(straw, "straw_tail", "cylinder", (.0032,(STRAW_LENGTH-.020)/2),
-         (0,0,-(STRAW_LENGTH+.001)/2), STRAW_COLOR, mass=".0042")
+    # Cylinder ends meet the mouthpiece at -11 mm. The inlet and mouth sites
+    # mark the geometric endpoints of the complete removable assembly.
+    tail_length = -STRAW_MOUTH_Z - STRAW_INLET_Z
+    geom(straw, "straw_tail", "cylinder", (.0032,tail_length/2),
+         (0,0,STRAW_INLET_Z+tail_length/2), STRAW_COLOR, mass=str(.0042*tail_length/.073))
     geom(straw, "straw_cassette_collar", "cylinder", (.0050,.0030), (0,0,-.0230), MINT,
          mass=".0016", friction=".35 .005 .0005")
     for name in ("straw_grip_surface","straw_tail","straw_cassette_collar"):
         ET.SubElement(root.find("contact"),"pair",geom1="table",geom2=name,
                       condim="6",friction=".36 .36 .005 .00012 .00012")
     site(straw, "straw_grip_site", (0,0,.0022))
-    site(straw, "straw_lower_end", (0,0,-STRAW_LENGTH+.008))
-    site(straw, "straw_upper_end", (0,0,.011))
+    site(straw, "straw_lower_end", (0,0,STRAW_INLET_Z))
+    site(straw, "straw_upper_end", (0,0,STRAW_MOUTH_Z))
 
     # Small compliant tongues provide radial retention. They never attach to
     # the straw. The shape and contact resisting an axial lift are physical.
@@ -400,12 +409,12 @@ class Bottle:
             for side, held in enumerate(bilateral):
                 if not (held and near_axis and parallel):
                     self.pull_anchor[side]=np.nan
-                elif np.isnan(self.pull_anchor[side]) and local_tip[2]<GUIDE_TOP:
+                elif np.isnan(self.pull_anchor[side]) and local_tip[2]<=EXTRACTION_START_MAX:
                     self.pull_anchor[side]=local_head[2]
                 elif np.isfinite(self.pull_anchor[side]):
                     lift=local_head[2]-self.pull_anchor[side]
                     self.held_lift_m=max(self.held_lift_m,lift)
-                    if lift>.055 and local_tip[2]>GUIDE_TOP+.009:
+                    if lift>=EXTRACTION_MIN_LIFT and local_tip[2]>GUIDE_TOP+.009:
                         self.extracted=True
                         self.tip_clearance_m=float(local_tip[2]-GUIDE_TOP)
                         self.events.append(("held straw lower tip cleared wide spout",float(d.time)))
