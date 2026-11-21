@@ -25,10 +25,13 @@ class SweepAudit:
         names = [model.geom(i).name for i in range(model.ngeom)]
         self.rank_by_geom = np.full(model.ngeom, -1, dtype=int)
         self.side_by_geom = np.full(model.ngeom, -1, dtype=int)
+        self.arm_by_geom = np.full(model.ngeom, -1, dtype=int)
         for geom, name in enumerate(names):
             if name.startswith('card_') and '_panel_' in name:
                 self.rank_by_geom[geom] = int(name[5:7])
             for side, prefix in enumerate(SIDES):
+                if name.startswith(f'{prefix}_') and '_contact_' in name:
+                    self.arm_by_geom[geom] = side
                 if name.startswith(f'{prefix}_tip_') and '_contact_' in name:
                     self.side_by_geom[geom] = side
         self.bodies = np.array([model.body(f'card_{i:02d}').id for i in range(COUNT)])
@@ -36,21 +39,28 @@ class SweepAudit:
         self.start_cards = data.xpos[self.bodies].copy()
         self.previous_cards = self.start_cards.copy()
         self.active = None
+        self.sweep_ended = False
         self.failed = False
         self.first_x = self.max_x = self.contact_time = 0.
         self.max_group = 0
         self.touched = set()
+        self.arms_used = set()
 
-    def observe_contact(self, data, touched):
+    def observe_contact(self, data, touched, arms_in_contact):
         for contact in data.contact[:data.ncon]:
             first, second = contact.geom
+            if min(first, second) < 0 or contact.dist > 0:
+                continue
             for finger, card in ((first,second),(second,first)):
                 side = int(self.side_by_geom[finger])
                 rank = int(self.rank_by_geom[card])
-                if side >= 0 and rank >= 0 and contact.dist < 0:
+                arm = int(self.arm_by_geom[finger])
+                if rank >= 0 and arm >= 0:
+                    arms_in_contact.add(arm)
+                if side >= 0 and rank >= 0:
                     touched[side].add(rank)
 
-    def update(self, data, touched):
+    def update(self, data, touched, arms_in_contact):
         positions = data.xpos[self.bodies]
         motions = np.linalg.norm(positions[:, :2] - self.previous_cards[:, :2], axis=1)
         moving = int(np.count_nonzero(motions > .0005))
@@ -69,10 +79,20 @@ class SweepAudit:
                 # away before a packet moves is a separate dealing action.
                 self.failed = True
 
+        self.arms_used.update(arms_in_contact)
         if self.active is not None:
             hits = touched[self.active]
             x = float(points[self.active, 0])
-            if moving and data.time - self.contact_time > .40:
+            idle_contact_time = float(data.time) - self.contact_time
+            if self.arms_used - {self.active}:
+                self.failed = True
+            if idle_contact_time > .40:
+                self.sweep_ended = True
+            if self.sweep_ended and (moving or arms_in_contact):
+                self.failed = True
+            if self.active in arms_in_contact and not hits:
+                # The fingers must do the spreading. A separate push with
+                # the wrist or an arm link cannot extend the valid stroke.
                 self.failed = True
             if hits:
                 if x < self.max_x - .018:
@@ -83,7 +103,7 @@ class SweepAudit:
                 self.contact_time = float(data.time)
 
         self.previous_cards = positions.copy()
-        released = not any(touched) and np.min(np.linalg.norm(points[:,None,:] - positions[None,:,:], axis=2)) >= .055
+        released = not arms_in_contact and np.min(np.linalg.norm(points[:,None,:] - positions[None,:,:], axis=2)) >= .055
         return bool(released)
 
     @property
@@ -114,11 +134,11 @@ class RibbonTrial:
             self.data.ctrl[self.arms[i]] = targets[:6]
             self.data.ctrl[self.grippers[i]] = targets[6] * .0475
         touched = (set(),set())
+        arms_in_contact = set()
         for substep in range(self.substeps):
             mj.mj_step(self.model,self.data)
-            if substep % 25 == 24 or substep == self.substeps-1:
-                self.method.observe_contact(self.data,touched)
-        released = self.method.update(self.data,touched)
+            self.method.observe_contact(self.data, touched, arms_in_contact)
+        released = self.method.update(self.data, touched, arms_in_contact)
         self.value, self.layout = self.grade.update(self.data,1./CONTROL_HZ,
                                                      sweep_verified=self.method.verified,
                                                      released=released)

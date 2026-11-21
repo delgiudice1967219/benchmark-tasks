@@ -18,10 +18,10 @@ Use the close fixed video to verify a single continuous sweep of the packet with
 
 - **0.25** when an uninterrupted run of at least three ranks is readable.
 - **0.50** when an uninterrupted run of at least eight ranks is readable.
-- **1.00** when all thirteen are readable in one run, all cards remain on the felt, and neither gripper contacts a card or comes within 55 mm of a card center for two continuous seconds after setting the spread down.
+- **1.00** when all thirteen are readable in one run, all cards remain on the felt, and both arms stay off the cards for two continuous seconds after setting the spread down. During this hold the tool-center point of each gripper must be at least 55 mm from every card center. Use the close and overhead views to check clearance.
 - **0.00** otherwise, including a cleared or squared packet with no valid sweep.
 
-The simulator looks for a continuous hand stroke in the left-to-right direction while its fingertips contact a moving packet. It checks simultaneous contact with multiple layers, keeps the observed hand and motion history, and rejects interrupted placement motions. The visual grader traces the actual projected corners of each rank. It then measures the overlapping footprint, order, and released dwell. The scripted policy emits joint targets computed from the reset and CAD dimensions, and the method audit runs unchanged for the learned policy.
+Use the video to check that one gripper spreads the packet in a single pass. Contacting the cards with the other arm or returning to rearrange cards after the sweep invalidates the trial. The simulator monitors contact at every physics step, detects fingertip contact with multiple layers, and tracks the active hand and the packet's motion. The visual grader tests the projected rank patches, overlapping footprints, order, and released dwell. The scripted policy emits joint targets computed from the reset and CAD dimensions, and the method audit runs unchanged for the learned policy.
 
 ## Reproduction and policy interface
 
