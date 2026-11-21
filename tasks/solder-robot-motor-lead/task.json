@@ -1,0 +1,21 @@
+{
+  "title": "Solder an extension onto a robot's motor lead",
+  "category": "Impact on AI timelines",
+  "keywords": [
+    "robot motor wiring",
+    "wire-to-wire lap splice",
+    "soldering iron",
+    "bimanual solder feed",
+    "guarded return"
+  ],
+  "instruction": "Solder the extension to the motor's red lead. Leave the cooled splice exposed for inspection and return the iron to its stand.",
+  "context": "Extending a motor lead lets a robot builder route the harness to its controller with room for strain relief. The two conductors begin separate. They must be aligned, heated and wetted with solder while the copper stays in contact. The exposed joint is inspected before insulation and installation.",
+  "setup": "Use the 130 by 110 by 6 cm laminate tabletop, 76 cm high, with two YAM arms mounted 61 cm apart and the grippers open at their ready poses. Mount an unpowered 37 mm metal gearmotor and matching 18 AWG stranded copper extension, both with PVC insulation. Park the black return lead, and strip and pre-tin 6.7 mm of the red lead and 7 mm of the extension. Hold the wires in 12 by 25 mm spring clips on a steel holder. Set the moving clip 6.3 degrees open so the wires start about 7 mm apart, aligned for 4 mm of possible axial lap. The clip swivel is 40.6 cm in front of the arm base line, midway between the bases, and 91 mm above the worktop. Park the 22 mm diameter temperature-controlled iron in its guarded steel cradle and the 0.8 mm lead-free rosin-core solder pen in its fork holder. See the README and setup image for tool locations, rest and fixture dimensions, and safety equipment for a physical trial.",
+  "scoring": "Use close video with a millimetre scale, a multimeter and a 1 N spring gauge after the joint cools. Score 0 if either arm strikes the other, the iron falls onto or below the table, either wire is visibly damaged, or heated iron metal contacts an unintended surface for more than 0.28 seconds total outside the guard. Otherwise award 0.25 if the intact bare conductors finish touching with 3 to 6 mm of axial lap and remain in contact for the final three 20 Hz frames. Award 0.75 if a visible cooled fillet wets both conductors for at least 3 mm of the lap and the unclipped splice maintains continuity during a 1 N axial pull. Award 1.00 if the joint also finishes with the iron independently supported in its stand and its hot tip within the guard, while both gripper pinch points stay at least 75 mm from the joint and tool grips for the final second before the inspection. All other outcomes score 0.",
+  "action_limit": 1800,
+  "run_limit": "1,800 control steps (90 seconds at 20 Hz).",
+  "reset_notes": "Replace the two active samples with fresh matching pre-tinned leads. Restore the clips to the photographed opening and overlap, keep the motor unpowered, restore both tools to their rests and leave 14 mm of solder exposed. Reset the arms. Conduct the electrical and proof-pull checks only on fully cooled, unpowered wires.",
+  "fidelity": "The calibrated dual-YAM scene uses MuJoCo, native contacts for the free tools, constrained clip swivel, copper and feed, and a force-dependent thermal and cooling model. Adequate native contact and filler feed create a bounded cohesive hinge response. The unsupported wire tails are simplified visual drapes. Joint strength, thermal damage and electrical continuity require physical verification; the closed clips and simulated cohesive response do not certify the physical proof load.",
+  "scores": "Dream-1: 0.00; scripted demo: 1.00.",
+  "media": "M-6U37L3"
+}
