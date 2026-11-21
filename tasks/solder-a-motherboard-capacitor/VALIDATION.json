@@ -1,0 +1,227 @@
+{
+  "reproduction": {
+    "independent_task_copy": true,
+    "station_installed_from_pinned_wheel": true,
+    "native_states_byte_identical_to_recorded": true,
+    "scope": "CPU simulation. Physical forces, thermal constants and tool handling estimates remain unmeasured."
+  },
+  "runs": {
+    "full": {
+      "score": 1.0,
+      "time_s": 37.650000000002954,
+      "seated": true,
+      "tools_in_holders": true,
+      "hands_clear": true,
+      "hot_tool_contact_with_robot_or_table_s": 0.0,
+      "cross_arm_contact_s": 0.0,
+      "opposite_tools_gripped_s": 22.5690000000046,
+      "seat_gap_mm": -0.06745640718541779,
+      "lead_radial_error_mm": [
+        0.11939418360290974,
+        0.12106611497667802
+      ],
+      "exposed_lead_mm": [
+        4.869548179380567,
+        4.860358969085876
+      ],
+      "correct_polarity": true,
+      "lead_tips_m": [
+        [
+          0.017438111579748443,
+          -0.06889789811697637,
+          0.8708695481793806
+        ],
+        [
+          0.02259971108872052,
+          -0.06893133630521364,
+          0.8708603589690859
+        ]
+      ],
+      "pad_temperature_c": [
+        25.00001037999109,
+        25.094120228709304
+      ],
+      "peak_temperature_c": [
+        330.5199571679943,
+        330.982001881687
+      ],
+      "solder_volume_mm3": [
+        1.0337599999999878,
+        1.5506399999999794
+      ],
+      "wetted_lands": [
+        true,
+        true
+      ],
+      "pad_iron_contact_n": [
+        0.0,
+        0.0
+      ],
+      "pad_solder_contact_n": [
+        0.0,
+        0.0
+      ],
+      "max_iron_contact_n": [
+        3.011279584773173,
+        1.509912792574486
+      ],
+      "max_solder_contact_n": [
+        4.112625235674447,
+        2.8692349304608245
+      ],
+      "heating_s": [
+        2.8819999999997936,
+        2.9539999999997857
+      ],
+      "feeding_s": [
+        0.7280000000000005,
+        1.0919999999999905
+      ],
+      "unwanted_hot_contact_s": 0.0,
+      "latest_hot_contact_elsewhere": [],
+      "bridge": false,
+      "heat_damage": false,
+      "part_withdrew": false,
+      "cooled_and_undisturbed_s": 3.1529999999997638,
+      "ever_seated": true,
+      "actions": 753,
+      "events": [
+        {
+          "time_s": 19.286000000000588,
+          "land": 0,
+          "temperature_c": 327.9092307122198,
+          "solder_mm3": 0.8108199999999914
+        },
+        {
+          "time_s": 28.45100000001179,
+          "land": 1,
+          "temperature_c": 323.54285820129076,
+          "solder_mm3": 0.8108199999999914
+        },
+        {
+          "time_s": 29.653000000013257,
+          "mechanical_bond_at_native_pose": true
+        }
+      ],
+      "peak_joint_effort_nm": [
+        [
+          6.06580563315913,
+          3.2148582141425095,
+          4.438814783619051,
+          4.826695862150757,
+          3.8246676564433244,
+          5.02055177029802
+        ],
+        [
+          6.132412905162624,
+          3.293294991720046,
+          2.3201482991031526,
+          4.8040593871864985,
+          4.921101569185765,
+          2.739847777867279
+        ]
+      ],
+      "peak_joint_speed_rad_s": [
+        [
+          1.11487001856051,
+          0.6152641923281434,
+          0.7924967632892624,
+          0.8587408491429778,
+          0.6783761356327483,
+          0.8904456503640875
+        ],
+        [
+          1.1290580726994641,
+          0.6317453234056032,
+          0.430620477457239,
+          0.8533339274463771,
+          0.8636728780928171,
+          0.4860973969146215
+        ]
+      ],
+      "peak_finger_speed_m_s": [
+        0.08066655920835478,
+        0.08067753678464401
+      ],
+      "error": null,
+      "mode": "solder-stage"
+    },
+    "cold": {
+      "score": 0.0,
+      "actions": 753,
+      "bridge": false,
+      "heat_damage": false,
+      "part_withdrew": false
+    },
+    "idle": {
+      "score": 0.0,
+      "actions": 1000,
+      "bridge": false,
+      "heat_damage": false,
+      "part_withdrew": false
+    },
+    "one-joint": {
+      "score": 0.5,
+      "actions": 666,
+      "bridge": false,
+      "heat_damage": false,
+      "part_withdrew": false
+    },
+    "policy": {
+      "actions": 8,
+      "status": "complete",
+      "requests": 0,
+      "model_attempted": false,
+      "offline_check": true,
+      "score": 0.0
+    }
+  },
+  "nominal_limits": {
+    "proximal_joint_effort_nm": 27,
+    "distal_joint_effort_nm": 7,
+    "per_finger_effort_n": 40
+  },
+  "media": {
+    "duration_s": 37.7,
+    "fps": 20,
+    "frames": 754,
+    "resolution": [
+      1360,
+      720
+    ],
+    "codec": "H.264",
+    "decoded_without_error": true,
+    "sha256": {
+      "review.mp4": "c0cabcbbaf1fb96f03308316a6ed04349599b2dc3534bf33c90a8049f569583b",
+      "setup.png": "bd6ecda9fb35bc8bb1ed4127f60921cae1171b00dc161603db8369d266b23a83",
+      "final.png": "e6e028ab6a5c5caf22a27361e3f58b6405ed9fe6247e7c83adaa8eac010b7308",
+      "states.npz": "af1aa233390d9b79e72d3cf643f66de0bdb00ee7e4554a91ebb6955684df6339"
+    }
+  },
+  "source_sha256": {
+    "ENVIRONMENT.json": "e3897d32cd3eecaee1d704d6aaea9f973045849172670e1e5a7bd3db32e79a3f",
+    "commands.npy": "1059482e18ddb8ac64e2cd1f60060f542a676cb208bb923393f35a59262fbded",
+    "controller.py": "cab80369e23e76edd35c6d68500cdf16e0f009e57debd6164349225085d18100",
+    "dream_capacitor.py": "1b6657d0f39bd50eef022ba775375421881e6cd4c87ebab443e950966066a6ac",
+    "dream_episode.py": "17e7a010955bab833b3e75d745b1e1cba7ecf41080349f7c04c7f0e66b33db99",
+    "material.py": "bc56e2ae2f04ff79bd3cd614e0f510fa3aed2b54516e4d577f49fd6d1a4720a0",
+    "render.py": "c5b3adf6469b577e3ebcd3851cd576ca040277accda7985445a3b232c1892d3b",
+    "review_media.py": "de1ab4388db82a620dcb364dcfa9b188d7122dc6a87f1826963b78ed7ee691af",
+    "run.py": "c59d96863f62ca46bc4515d587f718370db2a6ccef7c7b6c30804574f4eb28ee",
+    "scene.py": "c9853199d993fa4317f98a876339ac28c51fbc22d8b3c51a5ef3d90e32b4c302",
+    "setup.json": "01967c2d49044f960b7c224217a4b809e50b4eeecea368c37f2f9a9c00d8280b",
+    "task.json": "a5cf4e2e6310e6a64ae546c4398661313c38dcc5d2cd7689fe3d3cf67dc6137e",
+    "yam_motion.py": "1e679f60242f953f797540367ab9ee50d27dd7bb58ffc2452f35b8aaabcf3fd3"
+  },
+  "dream_1": {
+    "score": 0.0,
+    "actions": 1000,
+    "inference_requests": 113,
+    "wetted_lands": [
+      false,
+      false
+    ],
+    "same_initial_native_pose_as_demo": true,
+    "sha256": "7bc0a3da7d4936d5316c8a2875a6aaf1b6c1630d722416a71754a36c88567e51"
+  }
+}

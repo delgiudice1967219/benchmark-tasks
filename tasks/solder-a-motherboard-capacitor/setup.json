@@ -1,0 +1,10 @@
+{
+  "coordinate_frame": "Metres. Positive X points toward the left arm, positive Y toward the arm-base line, positive Z upward. The arm-base line is Y=0.24 m.",
+  "table": {"material": "rigid wood top", "size_m": [1.3, 1.1, 0.06], "surface_z_m": 0.76},
+  "station": {"embodiment": "bimanual YAM with parallel grippers", "base_spacing_m": 0.61, "joint_ready_rad_left_and_right": [0, 1, 1, -0.6, 0, 0], "ready_gripper_aperture_m": 0.095},
+  "board": {"reference": "ASRock P4S55FX+", "laminate": "FR-4", "size_m": [0.305, 0.218, 0.0016], "center_xy_m": [0.02, -0.167], "solder_side_z_m": 0.866, "orientation": "underside up, service edge facing robot, battery removed and disconnected", "joint_centers_xy_m": [[0.0175, -0.069], [0.0225, -0.069]], "positive_x_lead": "positive terminal"},
+  "capacitor": {"stock": "Chemi-Con EKZE6R3ELL102MJC5S", "body_diameter_m": 0.010, "body_length_m": 0.0125, "lead_diameter_m": 0.00060, "lead_pitch_m": 0.005, "trimmed_preparation_length_m": 0.0064, "face_gap_at_reset_m": [0, 0.001]},
+  "holders": {"board_clamp_center_x_m": [-0.137, 0.177], "board_clamp_center_y_m": -0.167, "support": "fixed independent insulating support below capacitor; replaceable peg cup has a 10.4 mm bore"},
+  "iron": {"reference": "Weller WEP70 with ETA chisel", "tip_width_m": 0.0016, "handle_center_m": [0.213, 0.059, 0.832], "handle_length_m": 0.084, "handle_diameter_m": 0.018, "simulation_setpoint_c": 335, "target_axis_in_table_plane": "sin(-57 deg), -cos(-57 deg)"},
+  "solder_dispenser": {"material": "plastic tube, steel holder, SAC305 flux-core wire", "wire_diameter_m": 0.00081, "wire_exposed_m": 0.016, "tube_center_m": [-0.184, 0.05, 0.83], "tube_length_m": 0.11, "tube_diameter_m": 0.0144, "target_axis_in_table_plane": "sin(55 deg), -cos(55 deg)"}
+}

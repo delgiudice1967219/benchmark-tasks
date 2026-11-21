@@ -1,0 +1,21 @@
+{
+  "title": "Solder both leads of a replacement motherboard capacitor",
+  "category": "Other",
+  "keywords": [
+    "board-level repair",
+    "plated through-hole",
+    "capacitor",
+    "soldering",
+    "bimanual"
+  ],
+  "instruction": "Solder both leads of the replacement capacitor to the motherboard. Return the iron and solder tube to their holders.",
+  "context": "Component-level repair replaces individual failed parts to recover an existing electronics assembly. The two leads share a tight space, but each joint needs its own heat and solder transfer without connecting the two pads.",
+  "setup": "Use a calibrated bimanual YAM station on a 110 by 130 by 6 cm wood-top table with a 76 cm work surface and 61 cm base spacing. Mount an unplugged ASRock P4S55FX+ board or an equivalent sacrificial populated board with the same lead and edge clearance, with its battery removed, underside-up in an ESD-safe edge holder. The board is 305 by 218 by 1.6 mm, with the solder side 106 mm above the table. Use a prepared 5 mm-pitch site and a correctly oriented dry-fitted Chemi-Con EKZE6R3ELL102MJC5S capacitor, aluminum radial 10 by 12.5 mm, with nominal 0.60 mm leads and a temporary insulating support below the component. Fit a temperature-controlled Weller WEP70 handpiece with an ETA 1.6 mm chisel tip in the left arm’s steel holder and 0.81 mm lead-free SAC305 flux-core solder in a right-hand dispenser tube. Use a heat-resistant mat, tip containment and fume extraction in a physical trial. See the setup photo and coordinates.",
+  "scoring": "Score zero if no joint qualifies, polarity is incorrect, the part leaves its holes, there is a bridge or heat damage, the hot tool harms a robot or work surface, or the arms strike each other. A qualifying joint requires simultaneous physical tip and wire contact at its lead and land while the two tools are held in separate grippers, with a visible fillet wetting both the lead and the land after cooling. Award 0.50 for one qualifying joint and 0.75 for both. Award 1.00 when both joints remain intact, the iron and dispenser are returned to their holders, and the grippers are wholly off the tools and their pinch points are at least 80 mm from the capacitor and tools for the final second. Check the full trial and use a magnified still photo of both joints.",
+  "action_limit": 1000,
+  "run_limit": "1,000 control steps (50 seconds at 20 Hz).",
+  "reset_notes": "Use a fresh component and clean, prepared holes. Seat the capacitor with correct polarity before starting, with component face at most 1 mm from the board. Keep the temporary backing and work holder fixed. Restore the tools to their holders and the arms to their ready pose. Use an unplugged, battery-removed assembly and match the setup image.",
+  "fidelity": "MuJoCo uses native YAM tool and pad contacts. Force-bearing iron contact heats the joint, and held solder transfers material during simultaneous contact with the lead and land. Cooling bonds the measured contact pose. Fixture details, thermal coefficients, solder deposition and lead compliance are estimates. The model omits molten flow, the iron cord, electrical continuity and material damage beyond its safety proxies.",
+  "scores": "Dream-1: 0.00; scripted demo: 1.00.",
+  "media": "M-KCTPED"
+}
