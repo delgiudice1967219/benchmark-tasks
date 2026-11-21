@@ -1,0 +1,181 @@
+{
+  "engine": "MuJoCo 3.11.0",
+  "render": "CPU-only Mesa EGL software",
+  "limit": 680,
+  "scripted": {
+    "score": 1.0,
+    "actions": 679,
+    "simulated_seconds": 33.95,
+    "released_seconds": 2.0,
+    "verified_single_flank_frames": 33,
+    "release_angle_deg": 179.07837349215234,
+    "max_released_gap_mm": 0.5200135060878047,
+    "adhesive_contacts": {
+      "left": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "right": [
+        true,
+        true,
+        true,
+        true
+      ]
+    }
+  },
+  "controls": {
+    "flat released repair": {
+      "score": 0.4,
+      "actions": 516,
+      "final_contact_n": [
+        0.0,
+        0.0
+      ],
+      "final_angle_deg": -0.092713480687068,
+      "adhesion": {
+        "left": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "right": [
+          true,
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    "one-sided tape": {
+      "score": 0.0,
+      "actions": 679,
+      "final_contact_n": [
+        0.0,
+        0.0
+      ],
+      "final_angle_deg": 178.3401922624484,
+      "adhesion": {
+        "left": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "right": [
+          false,
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "diagonal placement": {
+      "score": 0.0,
+      "actions": 679,
+      "final_contact_n": [
+        0.0,
+        0.0
+      ],
+      "final_angle_deg": 179.0241331046719,
+      "adhesion": {
+        "left": [
+          false,
+          false,
+          true,
+          true
+        ],
+        "right": [
+          false,
+          false,
+          true,
+          true
+        ]
+      }
+    },
+    "page held by one gripper": {
+      "score": 0.0,
+      "actions": 628,
+      "final_contact_n": [
+        0.0,
+        3.306778039761183
+      ],
+      "final_angle_deg": 60.00900835450744,
+      "adhesion": {
+        "left": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "right": [
+          true,
+          true,
+          true,
+          true
+        ]
+      }
+    }
+  },
+  "offline_policy": {
+    "task": "repair-a-torn-workbook-page",
+    "instruction": "Repair the torn workbook page and leave it turned over, with the print visible.",
+    "planned_actions": 2,
+    "rate_hz": 20,
+    "actions": 2,
+    "requests": 0,
+    "status": "complete",
+    "engine": "MuJoCo",
+    "offline_check": true,
+    "model_attempted": false,
+    "grading": {
+      "score": 0.0,
+      "patch": false,
+      "turn": false,
+      "release": false,
+      "actions": 2
+    },
+    "simulated_s": 0.1,
+    "wall_seconds": 0.8993428879766725
+  },
+  "media": {
+    "codec_name": "h264",
+    "width": 1360,
+    "height": 720,
+    "avg_frame_rate": "20/1",
+    "nb_frames": "679"
+  },
+  "sha256": {
+    "scripted.mp4": "29ffb4ac8636dc48799352dc31b1cf0be234256721fb7859ffdf1d787368b854",
+    "setup.png": "fb9ac43ddd466840f4e15abad6dde7faa2851352894f76617480acc52c822e93",
+    "scripted-actions.npy": "46590d88e0521d586b3f9d64cb2a38e5f9496b280dea0fc42d00b7a840e94a52"
+  },
+  "dream_1": {
+    "task": "repair-a-torn-workbook-page",
+    "instruction": "Repair the torn workbook page and leave it turned over, with the print visible.",
+    "planned_actions": 680,
+    "rate_hz": 20,
+    "actions": 680,
+    "requests": 73,
+    "status": "complete",
+    "engine": "MuJoCo",
+    "offline_check": false,
+    "model_attempted": true,
+    "grading": {
+      "score": 0.0,
+      "patch": false,
+      "turn": false,
+      "release": false,
+      "actions": 680
+    },
+    "simulated_s": 34.0,
+    "wall_seconds": 57.41185082998709,
+    "sha256": {
+      "dream.mp4": "474adb4b4d0fd2897045ffc87a2266df036b6816d4a6610ffff1193f4c1d5287",
+      "actions.npy": "d70d15ad1a3d48170fc6ade01e07f6f7efcc3c290d32495ac5dc032fd2b16b53",
+      "setup.png": "120ff5afc760131a506f4a85c775b58689afded3b2ba24285ccb7041cd497cac"
+    }
+  }
+}
