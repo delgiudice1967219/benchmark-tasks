@@ -1,0 +1,19 @@
+{
+  "title": "Fit a step-in harness on a dog mannequin",
+  "category": "Societal relatability",
+  "keywords": [
+    "pet harness",
+    "articulated mannequin",
+    "flexible straps",
+    "snap buckle"
+  ],
+  "instruction": "Fit the harness on the mannequin so both front legs are through their own openings and the buckle is closed over its back. Leave the fitted mannequin standing on the table and release the harness.",
+  "context": "A step-in dog harness uses flexible openings for both front legs and a buckle above the shoulders. The task uses an articulated mannequin to reproduce the physical fitting procedure.",
+  "setup": "Use the standard 760 mm tabletop with 610 mm between the two YAM bases. On it stand an articulated small-dog mannequin facing away from the bases, 410 mm long and 240 mm high, with a padded PETG or plywood torso, eight spring hinges, 64 mm forepaw spacing and 30 × 40 mm front paws. Place the chest center 285 mm forward of the base midpoint and on the station centerline. Lay a small, two-opening nylon step-in harness flat with its 80 mm sternum bridge on the centerline 474 mm forward of the base midpoint. Its webbing is 12 mm wide, its four strap runs are 140–160 mm, and the two halves of the 24 mm wide acetal side-release buckle start apart and facing inward. Use the setup photo to restore the foreleg openings. Start both grippers open and arms at the ready pose. A 0–10 N spring scale is used after release.",
+  "scoring": "Award 0.25 for each forepaw that has passed through its own triangular opening and stays threaded while the mannequin stands and both arms are clear for the final second. Award another 0.50 if both paws are threaded, both tabs are engaged with the buckle over the back, and closure holds through an independent 5 N pull for one second. Use still images and the trial video for placement, and a spring scale on the two buckle strap ends for the pull. No closure credit with a leg outside its opening or the buckle supported by the robot.",
+  "action_limit": 1000,
+  "run_limit": "1000 actions (50 seconds at 20 Hz).",
+  "reset_notes": "Unlatch both tabs. Lay the harness flat and restore the mannequin to all four feet at the original location. Restore arms to the ready pose. Replace stretched webbing or a damaged buckle.",
+  "fidelity": "Rigid mannequin segments articulate on passive spring hinges. Flexible nylon is modeled with hinged webbing runs and the acetal buckle uses two native flexing catches and a guide. The proof pull acts on a copy of the released final state. Mannequin hinge targets and latch forces are simulated estimates awaiting physical calibration.",
+  "scores": "Dream-1: 0.00; scripted demo: 1.00."
+}

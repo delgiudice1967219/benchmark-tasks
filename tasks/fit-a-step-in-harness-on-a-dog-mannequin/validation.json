@@ -1,0 +1,132 @@
+{
+  "control_hz": 20,
+  "action_limit": 1000,
+  "checks": {
+    "both legs and snapped buckle": {
+      "score": 1.0,
+      "actions": 985,
+      "released": true,
+      "forepaws_retained": {
+        "left": true,
+        "right": true
+      },
+      "proof_pull": {
+        "verified": true,
+        "ran": true,
+        "contacts": [
+          [
+            "left_buckle_catch_-1_shell",
+            "right_buckle_tine_1_tooth_shell"
+          ],
+          [
+            "left_buckle_catch_1_shell",
+            "right_buckle_tine_-1_tooth_shell"
+          ]
+        ],
+        "legs_after_pull": {
+          "left": true,
+          "right": true
+        },
+        "maximum_gap_mm": 22.613,
+        "applied_hold_seconds": 1.0
+      }
+    },
+    "both legs but rejected buckle": {
+      "score": 0.5,
+      "actions": 942,
+      "released": true,
+      "forepaws_retained": {
+        "left": true,
+        "right": true
+      },
+      "proof_pull": {
+        "verified": false,
+        "ran": true,
+        "contacts": [],
+        "legs_after_pull": {
+          "left": true,
+          "right": true
+        },
+        "maximum_gap_mm": 338.168,
+        "applied_hold_seconds": 1.0
+      }
+    },
+    "attempt without mannequin grip": {
+      "score": 0.0,
+      "actions": 432,
+      "released": true,
+      "forepaws_retained": {
+        "left": false,
+        "right": false
+      },
+      "proof_pull": {
+        "verified": false,
+        "ran": false
+      }
+    }
+  },
+  "offline_policy": {
+    "task": "fit-a-step-in-harness-on-a-dog-mannequin",
+    "instruction": "Fit the harness on the mannequin so both front legs are through their own openings and the buckle is closed over its back. Leave the fitted mannequin standing on the table and release the harness.",
+    "planned_actions": 2,
+    "rate_hz": 20,
+    "actions": 2,
+    "requests": 0,
+    "status": "complete",
+    "engine": "MuJoCo",
+    "offline_check": true,
+    "model_attempted": false,
+    "grading": {
+      "actions": 2,
+      "score": 0.0,
+      "forepaws_retained": {
+        "left": false,
+        "right": false
+      },
+      "released": false,
+      "proof_pull": {
+        "verified": false,
+        "ran": false
+      }
+    },
+    "simulated_s": 0.1,
+    "wall_seconds": 0.9542153280053753
+  },
+  "sha256": {
+    "actions.npy": "bf6bf16aa2cae8cdb9304672bf1063d2325da88a720dd2679b1c2c2104f0fb15",
+    "setup.png": "8f4eed05c85bea0619af34e018950002a9f05ebc91d3aa4bd194e2074e751e25",
+    "scripted-demo.mp4": "a905c0fd5eed06d68068427de1eeb508ec30954b70885d15d07fcde093959cc3"
+  },
+  "dream_1": {
+    "task": "fit-a-step-in-harness-on-a-dog-mannequin",
+    "instruction": "Fit the harness on the mannequin so both front legs are through their own openings and the buckle is closed over its back. Leave the fitted mannequin standing on the table and release the harness.",
+    "planned_actions": 1000,
+    "rate_hz": 20,
+    "actions": 1000,
+    "requests": 113,
+    "status": "complete",
+    "engine": "MuJoCo",
+    "offline_check": false,
+    "model_attempted": true,
+    "grading": {
+      "actions": 1000,
+      "score": 0.0,
+      "forepaws_retained": {
+        "left": false,
+        "right": false
+      },
+      "released": true,
+      "proof_pull": {
+        "verified": false,
+        "ran": false
+      }
+    },
+    "simulated_s": 50.0,
+    "wall_seconds": 83.87504124897532,
+    "sha256": {
+      "actions.npy": "2d53b77454ea713101243c7b3b3b1a5de6c49ff6d8d34e4dba1121154a2cd1c1",
+      "setup.png": "027b81d868e58e96dfc0160c141c21164c6d7366d4e6d2d7ad5b5dc5c652d995",
+      "dream.mp4": "dd95157ba79de0ebada9b253f7a1f1f717ac5d5d84fe729b7426aed8720737e2"
+    }
+  }
+}

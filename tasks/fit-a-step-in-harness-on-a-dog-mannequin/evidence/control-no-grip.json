@@ -1,0 +1,1086 @@
+{
+  "actions": 432,
+  "score": 0.0,
+  "forepaws_retained": {
+    "left": false,
+    "right": false
+  },
+  "released": true,
+  "proof_pull": {
+    "verified": false,
+    "ran": false
+  },
+  "harness_has_physical_latch": true,
+  "starts_with_buckle_halves_facing_inward": true,
+  "dual_adjust": false,
+  "stage_pairs": {
+    "settle": {
+      "stage": "settle",
+      "body_mm": [
+        -0.0,
+        -43.04,
+        912.73
+      ],
+      "paws_mm": {
+        "left": [
+          32.0,
+          -134.02,
+          759.81
+        ],
+        "right": [
+          -32.0,
+          -134.02,
+          759.81
+        ]
+      },
+      "paw_inside": {
+        "left": false,
+        "right": false
+      },
+      "heights_above_web_mm": {
+        "left": -1.788,
+        "right": -1.788
+      },
+      "paw_entered": {
+        "left": false,
+        "right": false
+      },
+      "seated": {
+        "left": false,
+        "right": false
+      },
+      "limb_threaded": {
+        "left": false,
+        "right": false
+      },
+      "released": true,
+      "standing": true,
+      "buckle_mm": {
+        "left": [
+          83.65,
+          -234.0,
+          764.65
+        ],
+        "right": [
+          -87.29,
+          -234.0,
+          764.5
+        ]
+      },
+      "buckle_separation_mm": 170.93259326015968,
+      "tcp_mm": {
+        "left": [
+          305.0,
+          -83.74,
+          1020.38
+        ],
+        "right": [
+          -305.0,
+          -83.74,
+          1020.38
+        ]
+      },
+      "buckle_alignment": {
+        "male_in_female_mm": [
+          170.933,
+          0.0,
+          -0.158
+        ],
+        "axes_error_deg": 0.001
+      },
+      "pad_loads": {
+        "left": {
+          "mannequin": 0.0,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        },
+        "right": {
+          "mannequin": 0.0,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        }
+      }
+    },
+    "approach chest": {
+      "stage": "approach chest",
+      "body_mm": [
+        -0.0,
+        -43.03,
+        912.73
+      ],
+      "paws_mm": {
+        "left": [
+          32.0,
+          -134.06,
+          759.81
+        ],
+        "right": [
+          -32.0,
+          -134.07,
+          759.81
+        ]
+      },
+      "paw_inside": {
+        "left": false,
+        "right": false
+      },
+      "heights_above_web_mm": {
+        "left": -1.788,
+        "right": -1.788
+      },
+      "paw_entered": {
+        "left": false,
+        "right": false
+      },
+      "seated": {
+        "left": false,
+        "right": false
+      },
+      "limb_threaded": {
+        "left": false,
+        "right": false
+      },
+      "released": true,
+      "standing": true,
+      "buckle_mm": {
+        "left": [
+          83.66,
+          -234.0,
+          764.65
+        ],
+        "right": [
+          -87.3,
+          -234.0,
+          764.5
+        ]
+      },
+      "buckle_separation_mm": 170.9679203665082,
+      "tcp_mm": {
+        "left": [
+          2.05,
+          -61.55,
+          1039.37
+        ],
+        "right": [
+          -305.0,
+          -83.74,
+          1020.38
+        ]
+      },
+      "buckle_alignment": {
+        "male_in_female_mm": [
+          170.968,
+          -0.0,
+          -0.157
+        ],
+        "axes_error_deg": 0.0
+      },
+      "pad_loads": {
+        "left": {
+          "mannequin": 0.0,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        },
+        "right": {
+          "mannequin": 0.0,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        }
+      }
+    },
+    "align around chest": {
+      "stage": "align around chest",
+      "body_mm": [
+        -0.0,
+        -43.03,
+        912.73
+      ],
+      "paws_mm": {
+        "left": [
+          32.0,
+          -134.11,
+          759.81
+        ],
+        "right": [
+          -32.0,
+          -134.12,
+          759.81
+        ]
+      },
+      "paw_inside": {
+        "left": false,
+        "right": false
+      },
+      "heights_above_web_mm": {
+        "left": -1.788,
+        "right": -1.787
+      },
+      "paw_entered": {
+        "left": false,
+        "right": false
+      },
+      "seated": {
+        "left": false,
+        "right": false
+      },
+      "limb_threaded": {
+        "left": false,
+        "right": false
+      },
+      "released": true,
+      "standing": true,
+      "buckle_mm": {
+        "left": [
+          83.68,
+          -234.0,
+          764.65
+        ],
+        "right": [
+          -87.32,
+          -234.0,
+          764.5
+        ]
+      },
+      "buckle_separation_mm": 170.99848430959125,
+      "tcp_mm": {
+        "left": [
+          -0.07,
+          -60.1,
+          926.13
+        ],
+        "right": [
+          -305.0,
+          -83.74,
+          1020.38
+        ]
+      },
+      "buckle_alignment": {
+        "male_in_female_mm": [
+          170.998,
+          -0.0,
+          -0.157
+        ],
+        "axes_error_deg": 0.0
+      },
+      "pad_loads": {
+        "left": {
+          "mannequin": 0.0,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        },
+        "right": {
+          "mannequin": 0.0,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        }
+      }
+    },
+    "grasp chest": {
+      "stage": "grasp chest",
+      "body_mm": [
+        -0.0,
+        -43.04,
+        912.73
+      ],
+      "paws_mm": {
+        "left": [
+          32.0,
+          -134.12,
+          759.81
+        ],
+        "right": [
+          -32.0,
+          -134.14,
+          759.81
+        ]
+      },
+      "paw_inside": {
+        "left": false,
+        "right": false
+      },
+      "heights_above_web_mm": {
+        "left": -1.787,
+        "right": -1.787
+      },
+      "paw_entered": {
+        "left": false,
+        "right": false
+      },
+      "seated": {
+        "left": false,
+        "right": false
+      },
+      "limb_threaded": {
+        "left": false,
+        "right": false
+      },
+      "released": true,
+      "standing": true,
+      "buckle_mm": {
+        "left": [
+          83.69,
+          -234.0,
+          764.65
+        ],
+        "right": [
+          -87.32,
+          -234.0,
+          764.5
+        ]
+      },
+      "buckle_separation_mm": 171.00723831835907,
+      "tcp_mm": {
+        "left": [
+          -0.0,
+          -60.04,
+          925.73
+        ],
+        "right": [
+          -305.0,
+          -83.74,
+          1020.38
+        ]
+      },
+      "buckle_alignment": {
+        "male_in_female_mm": [
+          171.007,
+          -0.0,
+          -0.157
+        ],
+        "axes_error_deg": 0.0
+      },
+      "pad_loads": {
+        "left": {
+          "mannequin": 0.0,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        },
+        "right": {
+          "mannequin": 0.0,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        }
+      }
+    },
+    "lift mannequin": {
+      "stage": "lift mannequin",
+      "body_mm": [
+        -0.0,
+        -43.04,
+        912.73
+      ],
+      "paws_mm": {
+        "left": [
+          32.0,
+          -134.16,
+          759.81
+        ],
+        "right": [
+          -32.0,
+          -134.18,
+          759.81
+        ]
+      },
+      "paw_inside": {
+        "left": false,
+        "right": false
+      },
+      "heights_above_web_mm": {
+        "left": -1.787,
+        "right": -1.787
+      },
+      "paw_entered": {
+        "left": false,
+        "right": false
+      },
+      "seated": {
+        "left": false,
+        "right": false
+      },
+      "limb_threaded": {
+        "left": false,
+        "right": false
+      },
+      "released": true,
+      "standing": true,
+      "buckle_mm": {
+        "left": [
+          83.7,
+          -234.0,
+          764.65
+        ],
+        "right": [
+          -87.33,
+          -234.0,
+          764.5
+        ]
+      },
+      "buckle_separation_mm": 171.0298898774392,
+      "tcp_mm": {
+        "left": [
+          -0.02,
+          -60.06,
+          973.5
+        ],
+        "right": [
+          -305.0,
+          -83.74,
+          1020.38
+        ]
+      },
+      "buckle_alignment": {
+        "male_in_female_mm": [
+          171.03,
+          -0.0,
+          -0.157
+        ],
+        "axes_error_deg": 0.0
+      },
+      "pad_loads": {
+        "left": {
+          "mannequin": 0.0,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        },
+        "right": {
+          "mannequin": 0.0,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        }
+      }
+    },
+    "hold above bench": {
+      "stage": "hold above bench",
+      "body_mm": [
+        -0.0,
+        -43.04,
+        912.73
+      ],
+      "paws_mm": {
+        "left": [
+          32.0,
+          -134.17,
+          759.81
+        ],
+        "right": [
+          -32.0,
+          -134.19,
+          759.81
+        ]
+      },
+      "paw_inside": {
+        "left": false,
+        "right": false
+      },
+      "heights_above_web_mm": {
+        "left": -1.787,
+        "right": -1.787
+      },
+      "paw_entered": {
+        "left": false,
+        "right": false
+      },
+      "seated": {
+        "left": false,
+        "right": false
+      },
+      "limb_threaded": {
+        "left": false,
+        "right": false
+      },
+      "released": true,
+      "standing": true,
+      "buckle_mm": {
+        "left": [
+          83.7,
+          -234.0,
+          764.65
+        ],
+        "right": [
+          -87.34,
+          -234.0,
+          764.5
+        ]
+      },
+      "buckle_separation_mm": 171.03682859636123,
+      "tcp_mm": {
+        "left": [
+          0.01,
+          -60.03,
+          973.7
+        ],
+        "right": [
+          -305.0,
+          -83.74,
+          1020.38
+        ]
+      },
+      "buckle_alignment": {
+        "male_in_female_mm": [
+          171.037,
+          -0.0,
+          -0.157
+        ],
+        "axes_error_deg": 0.0
+      },
+      "pad_loads": {
+        "left": {
+          "mannequin": 0.0,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        },
+        "right": {
+          "mannequin": 0.0,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        }
+      }
+    },
+    "carry forepaws above the two loops": {
+      "stage": "carry forepaws above the two loops",
+      "body_mm": [
+        0.18,
+        -51.45,
+        912.98
+      ],
+      "paws_mm": {
+        "left": [
+          31.97,
+          -134.37,
+          759.78
+        ],
+        "right": [
+          -32.03,
+          -134.39,
+          759.84
+        ]
+      },
+      "paw_inside": {
+        "left": false,
+        "right": false
+      },
+      "heights_above_web_mm": {
+        "left": -1.822,
+        "right": -1.761
+      },
+      "paw_entered": {
+        "left": false,
+        "right": false
+      },
+      "seated": {
+        "left": false,
+        "right": false
+      },
+      "limb_threaded": {
+        "left": false,
+        "right": false
+      },
+      "released": false,
+      "standing": true,
+      "buckle_mm": {
+        "left": [
+          83.72,
+          -234.0,
+          764.65
+        ],
+        "right": [
+          -87.35,
+          -234.0,
+          764.5
+        ]
+      },
+      "buckle_separation_mm": 171.0648414112433,
+      "tcp_mm": {
+        "left": [
+          -1.0,
+          -158.22,
+          974.31
+        ],
+        "right": [
+          -305.0,
+          -83.74,
+          1020.38
+        ]
+      },
+      "buckle_alignment": {
+        "male_in_female_mm": [
+          171.065,
+          -0.0,
+          -0.157
+        ],
+        "axes_error_deg": 0.0
+      },
+      "pad_loads": {
+        "left": {
+          "mannequin": 0.5658,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        },
+        "right": {
+          "mannequin": 0.0,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        }
+      }
+    },
+    "lower paws through loops": {
+      "stage": "lower paws through loops",
+      "body_mm": [
+        -0.16,
+        -49.56,
+        912.83
+      ],
+      "paws_mm": {
+        "left": [
+          32.2,
+          -135.43,
+          759.71
+        ],
+        "right": [
+          -31.8,
+          -135.48,
+          759.63
+        ]
+      },
+      "paw_inside": {
+        "left": false,
+        "right": false
+      },
+      "heights_above_web_mm": {
+        "left": -1.894,
+        "right": -1.971
+      },
+      "paw_entered": {
+        "left": false,
+        "right": false
+      },
+      "seated": {
+        "left": false,
+        "right": false
+      },
+      "limb_threaded": {
+        "left": false,
+        "right": false
+      },
+      "released": false,
+      "standing": true,
+      "buckle_mm": {
+        "left": [
+          83.73,
+          -234.0,
+          764.65
+        ],
+        "right": [
+          -87.36,
+          -234.0,
+          764.5
+        ]
+      },
+      "buckle_separation_mm": 171.0913103385179,
+      "tcp_mm": {
+        "left": [
+          -1.58,
+          -159.7,
+          937.21
+        ],
+        "right": [
+          -305.0,
+          -83.74,
+          1020.38
+        ]
+      },
+      "buckle_alignment": {
+        "male_in_female_mm": [
+          171.091,
+          -0.0,
+          -0.157
+        ],
+        "axes_error_deg": 0.0
+      },
+      "pad_loads": {
+        "left": {
+          "mannequin": 0.7461,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        },
+        "right": {
+          "mannequin": 0.0,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        }
+      }
+    },
+    "place weight onto paws": {
+      "stage": "place weight onto paws",
+      "body_mm": [
+        0.0,
+        -49.62,
+        912.82
+      ],
+      "paws_mm": {
+        "left": [
+          32.35,
+          -135.7,
+          759.69
+        ],
+        "right": [
+          -31.65,
+          -135.77,
+          759.66
+        ]
+      },
+      "paw_inside": {
+        "left": false,
+        "right": false
+      },
+      "heights_above_web_mm": {
+        "left": -1.913,
+        "right": -1.944
+      },
+      "paw_entered": {
+        "left": false,
+        "right": false
+      },
+      "seated": {
+        "left": false,
+        "right": false
+      },
+      "limb_threaded": {
+        "left": false,
+        "right": false
+      },
+      "released": false,
+      "standing": true,
+      "buckle_mm": {
+        "left": [
+          83.73,
+          -234.0,
+          764.65
+        ],
+        "right": [
+          -87.37,
+          -234.0,
+          764.5
+        ]
+      },
+      "buckle_separation_mm": 171.098925500931,
+      "tcp_mm": {
+        "left": [
+          -1.12,
+          -159.76,
+          935.59
+        ],
+        "right": [
+          -305.0,
+          -83.74,
+          1020.38
+        ]
+      },
+      "buckle_alignment": {
+        "male_in_female_mm": [
+          171.099,
+          -0.0,
+          -0.157
+        ],
+        "axes_error_deg": 0.0
+      },
+      "pad_loads": {
+        "left": {
+          "mannequin": 0.6374,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        },
+        "right": {
+          "mannequin": 0.0,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        }
+      }
+    },
+    "release mannequin": {
+      "stage": "release mannequin",
+      "body_mm": [
+        0.09,
+        -49.65,
+        912.82
+      ],
+      "paws_mm": {
+        "left": [
+          32.41,
+          -135.94,
+          759.68
+        ],
+        "right": [
+          -31.59,
+          -136.02,
+          759.67
+        ]
+      },
+      "paw_inside": {
+        "left": false,
+        "right": false
+      },
+      "heights_above_web_mm": {
+        "left": -1.922,
+        "right": -1.928
+      },
+      "paw_entered": {
+        "left": false,
+        "right": false
+      },
+      "seated": {
+        "left": false,
+        "right": false
+      },
+      "limb_threaded": {
+        "left": false,
+        "right": false
+      },
+      "released": false,
+      "standing": true,
+      "buckle_mm": {
+        "left": [
+          83.74,
+          -234.0,
+          764.65
+        ],
+        "right": [
+          -87.37,
+          -234.0,
+          764.5
+        ]
+      },
+      "buckle_separation_mm": 171.10567305528147,
+      "tcp_mm": {
+        "left": [
+          -0.91,
+          -159.78,
+          934.77
+        ],
+        "right": [
+          -305.0,
+          -83.74,
+          1020.38
+        ]
+      },
+      "buckle_alignment": {
+        "male_in_female_mm": [
+          171.106,
+          -0.0,
+          -0.157
+        ],
+        "axes_error_deg": 0.0
+      },
+      "pad_loads": {
+        "left": {
+          "mannequin": 0.6517,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        },
+        "right": {
+          "mannequin": 0.0,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        }
+      }
+    },
+    "withdraw from mannequin": {
+      "stage": "withdraw from mannequin",
+      "body_mm": [
+        -0.25,
+        -58.97,
+        912.69
+      ],
+      "paws_mm": {
+        "left": [
+          30.77,
+          -153.0,
+          759.79
+        ],
+        "right": [
+          -33.23,
+          -152.67,
+          759.94
+        ]
+      },
+      "paw_inside": {
+        "left": false,
+        "right": false
+      },
+      "heights_above_web_mm": {
+        "left": -1.815,
+        "right": -1.661
+      },
+      "paw_entered": {
+        "left": false,
+        "right": false
+      },
+      "seated": {
+        "left": false,
+        "right": false
+      },
+      "limb_threaded": {
+        "left": false,
+        "right": false
+      },
+      "released": true,
+      "standing": true,
+      "buckle_mm": {
+        "left": [
+          83.74,
+          -234.0,
+          764.65
+        ],
+        "right": [
+          -87.37,
+          -234.0,
+          764.5
+        ]
+      },
+      "buckle_separation_mm": 171.11491788092758,
+      "tcp_mm": {
+        "left": [
+          0.28,
+          -159.55,
+          1051.03
+        ],
+        "right": [
+          -305.0,
+          -83.74,
+          1020.38
+        ]
+      },
+      "buckle_alignment": {
+        "male_in_female_mm": [
+          171.115,
+          -0.0,
+          -0.157
+        ],
+        "axes_error_deg": 0.0
+      },
+      "pad_loads": {
+        "left": {
+          "mannequin": 0.0,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        },
+        "right": {
+          "mannequin": 0.0,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        }
+      }
+    },
+    "observe released feet": {
+      "stage": "observe released feet",
+      "body_mm": [
+        -0.22,
+        -58.56,
+        912.69
+      ],
+      "paws_mm": {
+        "left": [
+          30.69,
+          -152.89,
+          759.8
+        ],
+        "right": [
+          -33.31,
+          -152.13,
+          759.93
+        ]
+      },
+      "paw_inside": {
+        "left": false,
+        "right": false
+      },
+      "heights_above_web_mm": {
+        "left": -1.802,
+        "right": -1.667
+      },
+      "paw_entered": {
+        "left": false,
+        "right": false
+      },
+      "seated": {
+        "left": false,
+        "right": false
+      },
+      "limb_threaded": {
+        "left": false,
+        "right": false
+      },
+      "released": true,
+      "standing": true,
+      "buckle_mm": {
+        "left": [
+          83.75,
+          -234.0,
+          764.65
+        ],
+        "right": [
+          -87.38,
+          -234.0,
+          764.5
+        ]
+      },
+      "buckle_separation_mm": 171.13162837804276,
+      "tcp_mm": {
+        "left": [
+          0.35,
+          -159.49,
+          1053.17
+        ],
+        "right": [
+          -305.0,
+          -83.74,
+          1020.38
+        ]
+      },
+      "buckle_alignment": {
+        "male_in_female_mm": [
+          171.132,
+          -0.0,
+          -0.157
+        ],
+        "axes_error_deg": 0.0
+      },
+      "pad_loads": {
+        "left": {
+          "mannequin": 0.0,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        },
+        "right": {
+          "mannequin": 0.0,
+          "harness": 0.0,
+          "table": 0.0,
+          "other": 0.0
+        }
+      }
+    }
+  }
+}
