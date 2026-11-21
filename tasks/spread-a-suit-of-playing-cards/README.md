@@ -43,6 +43,8 @@ The no-contact control raises the same joint-planned sweep above the card packet
 
 The recorded Dream-1 episode completed 900 actions and made 100 inference requests. It scored **0.00**, with only the top rank visible and no qualifying fingertip sweep. The recorded scripted trial scored **1.00** after 214 actions. [Trial timings, scores and media hashes](validation.json)
 
+The same scripted commands scored **1.00** from each of two perturbed resets within the 1 mm squaring tolerance. Both trials exposed all thirteen ranks. The method audit also rejected simulated contact events from either arm after the sweep. [Reset and contact checks](validation.json)
+
 ## Fidelity and assets
 
 Each card is an independent rigid coated-paper surrogate with native edge, face, hand, and felt contacts. Flat cards match the guiding stroke in this trial. Omissions include card flex, bending damage, and surface-finish variation. The assumed felt/card, card/card, and dry gripper/card friction coefficients are 0.62, 0.22, and 0.43. They have not been measured on physical hardware. For a physical repetition, characterize the felt and coating with a tilt test and inspect the cards before and after the sweep. No artificial release, teleport, backstop, spring, or pose correction moves the cards after reset.
