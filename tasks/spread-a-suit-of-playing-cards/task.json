@@ -1,0 +1,14 @@
+{
+  "title": "Spread a suit of playing cards for inspection",
+  "category": "Societal relatability",
+  "keywords": ["card ribbon", "physical card display", "layered sliding contact", "controlled release"],
+  "instruction": "Spread the thirteen face-up hearts across the felt in one continuous overlapping row, keeping Ace through King in order and every rank readable. Leave the row untouched for two seconds.",
+  "context": "Opening a card table for play. A dealer spreads the cards face up by suit and in sequence so players can inspect them. This task reproduces the display of one complete suit. Producing the readable row requires releasing thin overlapping layers evenly during one moving contact stroke.",
+  "setup": "On the fixed dual-YAM station place a 510 × 248 × 2 mm polyester felt mat with its center 100 mm to the left and 338 mm forward from the midpoint of the bases, as viewed from the detail camera facing the bases. Square the thirteen coated-paper hearts face up, Ace on the bottom through King on top, with nominal 88 × 63 × 0.31 mm dimensions and long edges parallel to the baseline. Put the packet center 215 mm left and 338 mm forward of the baseline midpoint. Point the left-hand corner rank to the far edge from the viewer. Start with both arms in the station ready pose and both grippers open. The packet and felt are the only task objects.",
+  "scoring": "Score zero for individually placing cards into a row, missing or physically damaged cards, a card left outside the felt, or an incomplete moving sweep. In the final overhead image find the longest uninterrupted run of face-up ranks readable in Ace-to-King order. Consecutive cards overlap by at least 10% of a card area, with rank centers at least 4 mm apart along the spread. Score 0.25 for at least three, 0.50 for at least eight, and 0 otherwise. Award 1.00 if all thirteen satisfy these checks and both grippers stay clear of contact and at least 55 mm from every card center for two seconds after release. Check method and dwell on the fixed video and measure the result from the overhead photo.",
+  "action_limit": 900,
+  "run_limit": "900 control steps (45 seconds at 20 Hz).",
+  "reset_notes": "Replace any torn or bent card, put the suit back in Ace-to-King order from bottom to top and square the face-up stack to within 1 mm. Return the felt, deck, grippers and arms to the positions in the setup. Verify a separate hands-off run produces zero score.",
+  "fidelity": "The 13 full-size cards are independent rigid bodies with native hand, felt and inter-card contacts. The station uses the stock dual YAM model and policy cameras. The artwork is original. Card flex and permanent damage are not modeled and require physical inspection. Friction parameters are assumptions for coated card stock against felt and dry pads and have not been measured on the physical task.",
+  "scores": "Dream-1: 0.00; scripted demo: 1.00."
+}

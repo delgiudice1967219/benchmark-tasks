@@ -1,0 +1,93 @@
+{
+  "instruction": "Spread the thirteen face-up hearts across the felt in one continuous overlapping row, keeping Ace through King in order and every rank readable. Leave the row untouched for two seconds.",
+  "action_limit": 900,
+  "control_hz": 20,
+  "scripted": {
+    "actions": 214,
+    "score": 1.0,
+    "released_seconds": 3.3,
+    "rank_readable": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "video_sha256": "213c970502c9ef0a1738f89be276415928302d5655e0875a483a12f932c7f0a9",
+    "action_tape_sha256": "7df92ceddea63a17489fc85345dce35b5ae78da7ce46e3d14d7ee3f607a299d3"
+  },
+  "dream_1": {
+    "actions": 900,
+    "requests": 100,
+    "score": 0.0,
+    "grade": {
+      "score": 0.0,
+      "layout": {
+        "cards_on_felt": true,
+        "rank_readable": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          true
+        ],
+        "ordered_links": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "overlap_fraction": [
+          1.0000000000000002,
+          1.0000000000000002,
+          1.0000000000000002,
+          1.0000000000000002,
+          1.0000000000000002,
+          1.0000000000000002,
+          1.0000000000000002,
+          1.0000000000000002,
+          1.0000000000000002,
+          1.0000000000000002,
+          1.0000000000000002,
+          1.0000000000000002
+        ],
+        "longest_readable_run": 1
+      },
+      "actions": 900,
+      "clear_seconds": 0.0,
+      "continuous_sweep_verified": false,
+      "method_invalidated": false,
+      "hand_side": null,
+      "sweep_contact_span_mm": 0.0,
+      "peak_simultaneous_card_contacts": 0,
+      "distinct_cards_contacted": 0
+    },
+    "video_sha256": "066aa4fff2bc8bb3d3982c641c186e58f00f4fe0fff057d419b334b90fd612f7",
+    "action_tape_sha256": "6cdca34f412d6541069f6f42d19e698920e930d00b3892e18b71c74369ea73d2"
+  },
+  "setup_image_sha256": "5251e2f6117264c418db3c56fc4652d4b31a4a2fff53f8fd56605185320063dd"
+}
