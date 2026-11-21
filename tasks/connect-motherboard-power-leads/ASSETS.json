@@ -1,0 +1,59 @@
+{
+  "package": "dreamlabs 1.0.23",
+  "upstream_path": "dream_examples/yam_mujoco",
+  "authored_scene_assets": "Procedurally generated board, bench, cables, plugs and two spring tabs per circuit",
+  "dependency_assets": [
+    {
+      "name": "Robot CAD and collision parts",
+      "files": [
+        "base_link_visual.stl",
+        "gripper.stl",
+        "link2_black.stl",
+        "link2_white.stl",
+        "link3_black.stl",
+        "link3_white.stl",
+        "link_1_visual.stl",
+        "link_4_visual.stl",
+        "link_5_visual.stl",
+        "tip_left.stl",
+        "tip_right.stl",
+        "collisions.npz",
+        "yam.urdf",
+        "model.json"
+      ],
+      "license": "MIT",
+      "attribution": "I2RT Robotics"
+    },
+    {
+      "name": "YAM optical calibration",
+      "files": [
+        "sim-eval-yam.json"
+      ],
+      "license": "MIT",
+      "source": "https://github.com/ARISE-Initiative/yamlab/blob/ec0455d2b4ce35f21fc126418ea5e74ac567133d/yamlab/configs/robot/yam.yaml"
+    },
+    {
+      "name": "Dream Labs example and texture inputs",
+      "files": [
+        "blue_glaze.png",
+        "brown_glaze.png",
+        "oak.png"
+      ],
+      "generator": "yam_env.py",
+      "license": "Apache-2.0",
+      "source": "https://github.com/dreamlabs-co/dreamlabs"
+    },
+    {
+      "name": "Unused YCB example fruit scan inputs",
+      "files": [
+        "fruits/apple/texture_map.png",
+        "fruits/apple/visual.obj",
+        "fruits/banana/texture_map.png",
+        "fruits/banana/visual.obj"
+      ],
+      "license": "CC BY 4.0",
+      "attribution": "YCB Object and Model Set, Google scans. No fruit body is present in the task scene. The package provides original credit and remesh details in assets/fruits/ATTRIBUTION.md.",
+      "source": "https://ycb-benchmarks.s3.amazonaws.com/index.html"
+    }
+  ]
+}

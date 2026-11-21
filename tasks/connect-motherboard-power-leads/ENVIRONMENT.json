@@ -1,0 +1,28 @@
+{
+  "python": "3.12.12",
+  "mujoco": "3.11.0",
+  "numpy": "2.3.1",
+  "scipy": "1.17.0",
+  "opencv": "4.14.0.94rc1",
+  "station_assets": {
+    "distribution": "dreamlabs",
+    "version": "1.0.23",
+    "wheel": "dreamlabs-1.0.23-py3-none-any.whl",
+    "sha256": "63f47170aff86927f7bb0d66e77db5c2a721598e89885abe87fe051f7fe6f547",
+    "example": "dream_examples/yam_mujoco",
+    "mesh_license": "MIT",
+    "distribution_license": "Apache-2.0"
+  },
+  "policy": {
+    "inspect-robots": "0.60.0",
+    "inspect-robots-yam": "0.37.0",
+    "inspect-robots-dream": "0.1.0",
+    "dreamlabs-client": "1.0.14",
+    "camera_roles": ["top_cam", "left_cam", "right_cam"],
+    "camera_resolution": [320, 176],
+    "rows_per_request": 8
+  },
+  "control_hz": 20,
+  "physics_hz": 1000,
+  "action_limit": 2100
+}

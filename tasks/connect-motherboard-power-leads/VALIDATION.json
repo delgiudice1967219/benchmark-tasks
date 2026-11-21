@@ -1,0 +1,246 @@
+{
+  "scripted": {
+    "time_s": 70.59999999997305,
+    "score": 1.0,
+    "connector_scores": [
+      0.5,
+      0.5
+    ],
+    "connectors": [
+      {
+        "name": "ATX",
+        "plug_xyz_m": [
+          0.05311777251307812,
+          0.04398254122144952,
+          0.9119223324468564
+        ],
+        "xy_error_mm": 0.11905953882496409,
+        "seam_gap_mm": [
+          -0.17968715557253184,
+          -0.14146346789674358,
+          -0.013871638390394736,
+          0.02435204928539353
+        ],
+        "angle_deg": 0.3616182467699563,
+        "axial_contact_n": 0.0,
+        "peak_axial_contact_n": 0.0,
+        "clips_deg": [
+          0.0003658855515420452
+        ],
+        "max_clip_flex_deg": [
+          5.584338615791103
+        ],
+        "retention_loads_n": [
+          0.0
+        ],
+        "released_hold_s": 6.428000000000481,
+        "partial_hold_s": 6.428000000000481,
+        "robot_contact": false
+      },
+      {
+        "name": "EPS",
+        "plug_xyz_m": [
+          -0.12202289467686882,
+          0.14248037588874946,
+          0.9119996108951591
+        ],
+        "xy_error_mm": 0.5201282372856358,
+        "seam_gap_mm": [
+          -0.007285582554441422,
+          0.005666956103430459,
+          -0.006445165785084334,
+          0.006507372872787548
+        ],
+        "angle_deg": 2.190815906533151,
+        "axial_contact_n": 0.0,
+        "peak_axial_contact_n": 0.0,
+        "clips_deg": [
+          0.0004012013053733091,
+          0.0003969502128448092
+        ],
+        "max_clip_flex_deg": [
+          2.708006624881215,
+          3.1744722846720763
+        ],
+        "retention_loads_n": [
+          0.0,
+          0.0
+        ],
+        "released_hold_s": 43.119999999990206,
+        "partial_hold_s": 43.119999999990206,
+        "robot_contact": false
+      }
+    ],
+    "peak_case_contact_n": 11.152858479194919,
+    "three_newton_checks": [
+      {
+        "name": "ATX",
+        "passed": true,
+        "pull_n": 3.0,
+        "final": {
+          "name": "ATX",
+          "plug_xyz_m": [
+            0.05311063893094888,
+            0.04394436599926919,
+            0.9119093668608269
+          ],
+          "xy_error_mm": 0.12383906927472105,
+          "seam_gap_mm": [
+            -0.20828665294461007,
+            -0.16269071722548392,
+            -0.018575561120611622,
+            0.02702037459851453
+          ],
+          "angle_deg": 0.393589279413185,
+          "axial_contact_n": 0.0,
+          "peak_axial_contact_n": 0.0,
+          "clips_deg": [
+            0.00034893133115359697
+          ],
+          "max_clip_flex_deg": [
+            0.00036673350635780443
+          ],
+          "retention_loads_n": [
+            0.0
+          ],
+          "released_hold_s": 2.2999999999998577,
+          "partial_hold_s": 2.2999999999998577,
+          "robot_contact": false
+        },
+        "latch_geometry": [
+          {
+            "area_mm2": 11.12753191161498,
+            "x_overlap_mm": 5.806373396201743,
+            "y_overlap_mm": 1.9281843424404652,
+            "axial_clearance_mm": 0.2900661828744971
+          }
+        ]
+      },
+      {
+        "name": "EPS",
+        "passed": true,
+        "pull_n": 3.0,
+        "final": {
+          "name": "EPS",
+          "plug_xyz_m": [
+            -0.12203865987142128,
+            0.14249004197292153,
+            0.91183909050957
+          ],
+          "xy_error_mm": 0.5114213282999535,
+          "seam_gap_mm": [
+            -0.40594258003226813,
+            -0.3810550930293446,
+            0.05923611216946366,
+            0.08412359917238724
+          ],
+          "angle_deg": 2.65080317653315,
+          "axial_contact_n": 0.0,
+          "peak_axial_contact_n": 0.0,
+          "clips_deg": [
+            0.0003835649097492518,
+            0.00038426491164133517
+          ],
+          "max_clip_flex_deg": [
+            0.00045028351339533194,
+            0.00045659245003028
+          ],
+          "retention_loads_n": [
+            0.0,
+            0.0
+          ],
+          "released_hold_s": 2.2999999999998577,
+          "partial_hold_s": 2.2999999999998577,
+          "robot_contact": false
+        },
+        "latch_geometry": [
+          {
+            "area_mm2": 6.5945634406213705,
+            "x_overlap_mm": 5.841553286598606,
+            "y_overlap_mm": 1.2476035114447337,
+            "axial_clearance_mm": 0.42498415307374093
+          },
+          {
+            "area_mm2": 8.461146361148694,
+            "x_overlap_mm": 5.853864896452704,
+            "y_overlap_mm": 1.569300178992151,
+            "axial_clearance_mm": 0.2070639616938881
+          }
+        ]
+      }
+    ],
+    "control_hz": 20,
+    "actions": 1412,
+    "action_limit": 2100,
+    "peak_joint_effort_nm": [
+      [
+        4.33485344795173,
+        4.538815177668226,
+        4.081622597690597,
+        4.244272255844038,
+        6.286887057897812,
+        4.426495031638375
+      ],
+      [
+        3.336659908914214,
+        6.236307471855639,
+        6.604656456790508,
+        5.493525942096738,
+        2.7389167117797086,
+        5.304452416195801
+      ]
+    ],
+    "peak_arm_to_arm_contact_n": 0.0
+  },
+  "command_sha256": "95f603e1d7ae98ec46e473b0736d8fc7d77588660ce72afea42ce7142282245a",
+  "negative_controls": {
+    "idle_yam_episode": {
+      "score": 0.0,
+      "actions": 2100
+    },
+    "shallow_ATX_fixture": "No native catch overlap after withdrawal",
+    "shallow_EPS_fixture": "Neither catch overlaps its own shoulder after withdrawal",
+    "reversed_ATX_same_fixed_commands": {
+      "score": 0.0,
+      "connector_scores": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "materials": "Computer hardware dimensions from OEM public references. Assembled unit force-displacement and cable torque remain unmeasured on physical units.",
+  "package_recording": {
+    "resolution": [
+      1360,
+      720
+    ],
+    "frames": 1412,
+    "frame_rate": 20,
+    "duration_s": 70.6,
+    "sha256": "10dc71971c3d1f6cfe53409d92a79aa763f6e6eb0e40c9e20b57e20b967ffc71",
+    "equivalent_fresh_replays": 2
+  },
+  "robot_hardware_audit": {
+    "peak_arm_to_arm_contact_n": 0.0,
+    "peak_non_connector_contact_n": 11.152858479194919,
+    "peak_contact_feature": "right fingertip against modeled metal rear I/O housing during EPS release",
+    "peak_contact_time_s": 22.302
+  },
+  "offline_policy_adapter_check": {
+    "actions": 8,
+    "score": 0.0,
+    "model_attempted": false,
+    "status": "complete"
+  },
+  "dream_1": {
+    "score": 0.0,
+    "actions": 2100,
+    "inference_requests": 250,
+    "connector_scores": [
+      0.0,
+      0.0
+    ],
+    "same_initial_camera_image_as_demo": true,
+    "sha256": "f8d4ea5f86bf85b16f84e0dc2979f0fff7b6c32c8cffd07ad320c9697cb04371"
+  }
+}

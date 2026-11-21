@@ -1,0 +1,20 @@
+{
+  "title": "Connect both motherboard power leads",
+  "category": "Impact on AI timelines",
+  "keywords": [
+    "electronics assembly",
+    "keyed power connectors",
+    "connector retention",
+    "cable routing"
+  ],
+  "instruction": "Connect the power supply’s 24-pin main lead and paired 4+4-pin CPU lead to the motherboard. Leave both connectors fully seated and latched when you let go.",
+  "context": "Before installing a compute workstation in its chassis, the builder connects both power leads for bench bring-up. The two keyed housings require different alignment and grip positions, and both have to stay seated against the tension of the attached cables.",
+  "setup": "Place the 360 by 270 by 8 mm aluminum Open Benchtable V2 on the calibrated 110 by 130 cm wooden YAM worktop. Its midpoint is 44 mm toward the world-negative X arm and 201 mm forward from the arm base line. Screw the 244 by 240 mm FR4 ASUS PRIME B450M-A II motherboard onto its 25 mm standoffs. Mount the unplugged Corsair CX550 supply under the deck, with its two insulated 600 mm leads. Leave the two nylon plug housings loose, with their keys down. Place the 51.6 mm main housing on the deck outside the board and the pre-paired 18.0 mm CPU housing on the board beside the CPU socket. Keep both headers empty and match the setup image. Both robot grippers start open in the ready pose. The station cameras and supports are fixed.",
+  "scoring": "Score each power lead independently. During the last two seconds, both gripper pinch points must be at least 48 mm from its housing center, and neither gripper may touch its housing or cable. Score 0 for a damaged connector or board, a wrong housing, or a housing that fails both higher tiers. Score 0.25 if the intended housing stays engaged, its center is within 1.6 mm of the header center in the board plane, its angle differs by under 9.17 degrees, and all four seam gaps are below 4.3 mm. Score 0.50 if its center is within 1.3 mm, its angle differs by under 5.73 degrees, every seam gap is below 1.5 mm, and all clips are caught with the housing retained under a 3 N pull along the header axis. Check the seams using a feeler gauge, the catches in the close video, and the pull with a hand force gauge on an unpowered board.",
+  "action_limit": 2100,
+  "run_limit": "2,100 control steps (105 seconds at 20 Hz).",
+  "reset_notes": "Unplug the power supply. Release both housings by their original clips and inspect the contacts. Reproduce the initial housing locations and cable routing in the setup image. Verify that the two EPS halves begin properly joined, neither lead is engaged, and both arms are reset.",
+  "fidelity": "Native keyed housings, socket cavities, original latch cams and contact. Two transversely loaded tin contact tabs per circuit and a collidable passive stock tether approximation. Terminal force and cable properties use published limits and unmeasured modeling assumptions. Inspect material or electrical damage on the physical equipment.",
+  "scores": "Dream-1: 0.00; scripted demo: 1.00.",
+  "media": "M-FRTD9P"
+}
