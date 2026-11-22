@@ -15,5 +15,6 @@
   "run_limit": "1000 actions (50 seconds at 20 Hz).",
   "reset_notes": "Unlatch both tabs. Lay the harness flat and restore the mannequin to all four feet at the original location. Restore arms to the ready pose. Replace stretched webbing or a damaged buckle.",
   "fidelity": "Rigid mannequin segments articulate on passive spring hinges. Flexible nylon is modeled with hinged webbing runs and the acetal buckle uses two native flexing catches and a guide. The proof pull acts on a copy of the released final state. Mannequin hinge targets and latch forces are simulated estimates awaiting physical calibration.",
-  "scores": "Dream-1: 0.00; scripted demo: 1.00."
+  "scores": "Dream-1: 0.00; scripted demo: 1.00.",
+  "media": "M-FRY654"
 }
