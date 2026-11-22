@@ -1,6 +1,7 @@
 """Replay stock YAM pose commands and evaluate contact-driven paper repair."""
 
 import argparse
+from collections import deque
 from contextlib import ExitStack
 import json
 from pathlib import Path
@@ -14,6 +15,17 @@ from scene import (ARMS, BOOK_X, CAMERAS, DT, HOME, HZ, PAGE_DEPTH, PAPER_Z,
                    SPINE_Y, TAPE_COUNT, TAPE_STEP, TAPE_TIP, TAPE_X, TAPE_Z,
                    TEAR_START, build_model, reset)
 from score import score
+
+
+# Neschen filmoplast P data sheet, 20–45 mN/cm for a 20 mm strip at 300 mm/min.
+LINER_RELEASE_N = (.040 + .090) / 2
+# Engineering reference for a local fingertip-edge press. A 2 kg,
+# 45 mm-wide adhesive-test roller gives 0.436 N/mm. A 2 mm strip of that
+# line load sets a provisional target pending a workbook coupon test.
+BURNISH_N = 2.0 * 9.81 * .002 / .045
+PAPER_SUPPORT_N = .30
+BURNISH_SECONDS = .10
+BURNISH_WINDOW = round(BURNISH_SECONDS / DT)
 
 
 def attitude(hand, angle=0., turn=0, vertical=False):
@@ -46,11 +58,14 @@ class Trial:
         self.adhesive = {(i, side): self.model.equality(f"patch_{i}_{side}").id
                          for i in range(TAPE_COUNT) for side in ARMS}
         self.wrenches = np.zeros(6)
-        self.liner_clock = np.zeros(TAPE_COUNT - 1)
-        self.liner_force = np.zeros_like(self.liner_clock)
+        self.liner_force = np.zeros(TAPE_COUNT - 1)
+        self.liner_releases = {}
         self.liner = [self.model.equality(f"release_bond_{i}").id for i in range(TAPE_COUNT - 1)]
-        self.clock = {key: 0. for key in self.adhesive}
+        self.compression_windows = {key: deque(maxlen=BURNISH_WINDOW) for key in self.adhesive}
+        self.compression_integrals = dict.fromkeys(self.adhesive, 0.)
         self.pressure_peak = {key: 0. for key in self.adhesive}
+        self.presses = {key: (0., 0.) for key in self.adhesive}
+        self.burnish_events = {}
         self.hand_contact = np.zeros((2, 3))
         self.robot_page_contact = np.zeros(2)
         self.flank_contact = np.zeros(2)
@@ -99,22 +114,18 @@ class Trial:
             # Only tensile contact along the removal side of the backing releases the active peel front.
             front = i == len(self.liner) - 1 or not data.eq_active[self.liner[i + 1]]
             relevant = equality & (data.efc_id[:data.nefc] == bond)
-            force = np.linalg.norm(data.efc_force[:data.nefc][relevant])
+            reaction = data.efc_force[:data.nefc][relevant]
+            force = max(0., -float(reaction[2])) if len(reaction) == 3 else 0.
             self.liner_force[i] = max(self.liner_force[i], force)
-            lifted = next_segment.xmat.reshape(3, 3)[2, 1] > .065
-            if front and force > .033 and lifted:
-                self.liner_clock[i] += DT
-            else:
-                self.liner_clock[i] = 0.
-            if self.liner_clock[i] >= .004:
+            lifted = next_segment.xmat.reshape(3, 3)[2, 1] > .008
+            if front and force >= LINER_RELEASE_N and lifted:
+                self.liner_releases[i] = {"time_s": float(data.time), "tension_n": force}
                 data.eq_active[bond] = False
         self.hand_contact.fill(0.)
         self.robot_page_contact.fill(0.)
         self.flank_contact.fill(0.)
-        if not data.ncon:
-            return
-        region = {}
-        pressure = False
+        support = {}
+        pressing = {}
         for contact_id, (a, b) in enumerate(data.contact.geom):
             if a < 0 or b < 0:
                 continue
@@ -132,35 +143,71 @@ class Trial:
                             1 if gb.startswith(("flap_", "bound_page")) else 2)
                 mj.mj_contactForce(model, data, contact_id, self.wrenches)
                 self.hand_contact[hand, category] += max(0., self.wrenches[0])
-                pressure |= category == 0 and self.wrenches[0] > .014
-            elif ga.startswith("adhesive_") and gb.startswith("flap_"):
-                _, i, side = ga.split("_")
-                if gb.startswith(f"flap_{side}_"):
-                    key = int(i), side
+                if category == 0:
+                    key = self.tissue_key(gb)
+                    force = self.tissue_normal_force(contact_id, key, gb == self.names[b])
+                    pressing[key] = pressing.get(key, 0.) + max(0., -force)
+            elif ga.startswith("adhesive_") and gb.startswith(("flap_", "bound_page_paper")):
+                key = self.tissue_key(ga)
+                i, side = key
+                paper = "bound_page_paper" if i == 0 else f"flap_{side}_"
+                if gb.startswith(paper):
                     mj.mj_contactForce(model, data, contact_id, self.wrenches)
-                    normal = max(0., float(self.wrenches[0]))
+                    normal = self.tissue_normal_force(contact_id, key, ga == self.names[b])
                     point = data.contact.pos[contact_id].copy()
-                    along = (point[0] - BOOK_X) * (1 if side == "left" else -1)
-                    if .001 < along < .016 and (key not in region or normal > region[key][0]):
-                        region[key] = (normal, point)
+                    if abs(point[0] - BOOK_X) < .016 and normal > 0.:
+                        total, weighted = support.get(key, (0., np.zeros(3)))
+                        support[key] = (total + normal, weighted + normal * point)
         if any(data.eq_active[self.liner]):
             return
         for key, eq in self.adhesive.items():
+            above = pressing.get(key, 0.)
+            below, position_sum = support.get(key, (0., None))
+            self.presses[key] = (above, below)
             if data.eq_active[eq]:
                 continue
-            measurement = region.get(key)
-            if measurement is None or not pressure:
-                self.clock[key] = max(0., self.clock[key] - DT * .005)
-                continue
-            normal, contact = measurement
-            i, side = key
-            self.pressure_peak[key] = max(self.pressure_peak[key], normal)
-            segment = data.body(f"tissue_{i}")
+            self.pressure_peak[key] = max(self.pressure_peak[key], min(above, below))
+            segment = data.body(f"tissue_{key[0]}")
             upright = segment.xmat.reshape(3, 3)[2, 2] > .89
-            impulse = self.clock[key] + DT * (normal - .003)
-            self.clock[key] = max(0., impulse) if upright else 0.
-            if self.clock[key] >= .00032:
-                self.bond_here(eq, contact)
+            force = above if below >= PAPER_SUPPORT_N else 0.
+            averaged = self.compression_mean(key, force if upright else 0.)
+            if force > 0. and averaged >= BURNISH_N:
+                self.bond_here(eq, position_sum / below)
+                self.burnish_events[key] = {
+                    "time_s": float(data.time),
+                    "finger_n": above,
+                    "paper_n": below,
+                    "mean_applied_n": averaged,
+                    "support_window_s": BURNISH_SECONDS,
+                }
+
+    def compression_mean(self, key, simultaneous_n):
+        """Mean carried load at this region over the preceding 100 ms."""
+        history = self.compression_windows[key]
+        if simultaneous_n < BURNISH_N / 4:
+            simultaneous_n = 0.
+        # Limit the impulse from any one solver spike so an impact cannot
+        # stand in for sustained normal pressing.
+        sample = min(simultaneous_n, 2 * BURNISH_N)
+        if len(history) == BURNISH_WINDOW:
+            self.compression_integrals[key] -= history[0]
+        history.append(sample)
+        integral = self.compression_integrals[key] + sample
+        self.compression_integrals[key] = integral
+        if sample > 0. and len(history) == BURNISH_WINDOW:
+            return integral / BURNISH_WINDOW
+        return 0.
+
+    @staticmethod
+    def tissue_key(name):
+        _, number, side = name.split("_")
+        return int(number), side
+
+    def tissue_normal_force(self, contact_id, key, tape_is_second):
+        frame = self.data.contact.frame[contact_id].reshape(3, 3)
+        tape_normal = self.data.body(f"tissue_{key[0]}").xmat.reshape(3, 3)[:, 2]
+        on_second = frame.T @ self.wrenches[:3]
+        return float(tape_normal @ on_second) * (1 if tape_is_second else -1)
 
     def page_contact(self, robot, object_name, contact_id):
         mj.mj_contactForce(self.model, self.data, contact_id, self.wrenches)
@@ -183,9 +230,13 @@ class Trial:
             rotation = body.xmat.reshape(3, 3)
             centre = body.xpos + rotation @ np.array((0., TAPE_STEP / 2, 0.))
             tape.append(centre.tolist())
-            relative = surface.T @ (centre - flap_origin) + (0., TEAR_START, 0.)
-            local.append([*relative, float(rotation[:, 0] @ surface[:, 0]),
-                          float(rotation[:, 2] @ surface[:, 2]), float(rotation[:, 1] @ surface[:, 1])])
+            reference = frame if i == 0 else surface
+            origin = page.xpos if i == 0 else flap_origin
+            offset = 0. if i == 0 else TEAR_START
+            relative = reference.T @ (centre - origin) + (0., offset, 0.)
+            local.append([*relative, float(rotation[:, 0] @ reference[:, 0]),
+                          float(rotation[:, 2] @ reference[:, 2]),
+                          float(rotation[:, 1] @ reference[:, 1])])
         margins = []
         widths = []
         for i in range(8):
@@ -207,6 +258,7 @@ class Trial:
             "tear_width_mm": [width * 1000 for width in widths],
             "angles_deg": angles,
             "contact_n": self.hand_contact.tolist(),
+            "press_n": {str(key): values for key, values in self.presses.items()},
             "robot_page_contact_n": self.robot_page_contact.tolist(),
             "flank_contact_n": self.flank_contact.tolist(),
             "tcp_xyz": {side: d.site(f"{side}_tcp").xpos.tolist() for side in ARMS},
@@ -257,7 +309,10 @@ def peel(trial, no_grip=False):
     trial.phase("descend to free tissue edge", 1.2, (("right", grip + (0., .019, 0.), pose),))
     trial.phase("slide in open fingers", .8, (("right", grip, pose),))
     trial.phase("pinch the free tissue end", .5, openings=(("right", .013 if no_grip else .0),))
-    for dx, dy, dz in ((0., -.001, .012), (0., -.003, .024), (0., -.005, .045), (0., -.008, .063)):
+    # Start the opening motion near the 5 mm/s liner reference rate, so
+    # the first loaded front does not release on an initial force overshoot.
+    for dx, dy, dz in ((0., -.00025, .0025), (0., -.001, .012),
+                       (0., -.003, .033), (0., -.008, .063)):
         trial.phase("peel tissue upward", .55, (("right", grip + (dx, dy, dz), pose),))
     trial.phase("hold peeled tissue", .30)
     return grip, pose
@@ -272,7 +327,7 @@ def flatten_flap(trial):
     return pad, pose
 
 
-def place_tissue(trial, one_flank=False, skew=False):
+def place_tissue(trial, one_flank=False, skew=False, light_press=False):
     pad, pad_rotation = flatten_flap(trial)
     out = np.array((BOOK_X + (.013 if one_flank else 0), SPINE_Y + PAGE_DEPTH + .005, PAPER_Z))
     pose = attitude("right", np.pi / 2)
@@ -290,20 +345,30 @@ def place_tissue(trial, one_flank=False, skew=False):
     trial.phase("lift clear before reorienting fingers", .52,
                 (("right", out + (-.055, .040, .090), tilted),))
     burnish_pose = attitude("right", 0., vertical=True)
-    trial.phase("rotate the fingers above the seam", .70,
+    trial.phase("rotate the fingers above the seam", .40,
                 (("right", out + (-.055, -.026, .095), burnish_pose),), (("right", .006),))
-    trial.phase("bring the press to the inner tip of the tissue", .75,
-                (("right", out + (0., -.067, .030), burnish_pose),))
-    for x, y in ((0., -.054), (0., -.036), (0., -.018), (.004, -.054), (.004, -.036), (.008, -.019)):
-        trial.phase("burnish the tape into the paper", .50,
-                    (("right", out + (x, y, .0091 if x > .007 else .00965), burnish_pose),))
-        trial.phase("hold pressure", .23)
-        trial.phase("lift off after each press", .24,
+    inner = out + (.004, -.074, .00965 if light_press else -.0008)
+    above_inner = out + (.004, -.074, .018)
+    trial.phase("align above the inner end of the strip", .35,
+                (("right", above_inner, burnish_pose),))
+    trial.phase("press the inner end of the strip onto the intact page", .30,
+                (("right", inner, burnish_pose),))
+    trial.phase("hold pressure on the intact page", .20)
+    trial.phase("lift clear of the inner end", .20, (("right", above_inner, burnish_pose),))
+    for x, y in ((-.003, -.055), (.006, -.055), (-.003, -.037), (.006, -.037),
+                 (-.004, -.024), (.007, -.024)):
+        trial.phase("align above local tissue region", .20,
+                    (("right", out + (x, y, .018), burnish_pose),))
+        height = .00965 if light_press else -.0008
+        trial.phase("burnish the tape into the paper", .35,
+                    (("right", out + (x, y, height), burnish_pose),))
+        trial.phase("hold pressure", .25)
+        trial.phase("lift off after each press", .20,
                     (("right", out + (x, y, .018), burnish_pose),))
     trial.phase("retract pressing fingers from the book", .75,
                 (("right", out + (-.116, .033, .090), burnish_pose),))
     trial.phase("release the supporting fingers", .55,
-                (("left", pad + (.010, .010, .065), pad_rotation),))
+                (("left", pad + (.090, .010, .100), pad_rotation),))
     trial.phase("inspect the released repair before turning", .60)
 
 
@@ -347,6 +412,7 @@ def main():
     parser.add_argument("--turn-probe", action="store_true")
     parser.add_argument("--peel-only", action="store_true")
     parser.add_argument("--place-only", action="store_true")
+    parser.add_argument("--light-press", action="store_true")
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     with ExitStack() as stack:
@@ -374,14 +440,16 @@ def main():
         if not args.turn_probe:
             peel(trial, args.no_grip)
             if not args.peel_only:
-                place_tissue(trial, args.one_flank, args.skew)
+                place_tissue(trial, args.one_flank, args.skew, args.light_press)
         if not args.peel_only and not args.place_only:
             turn_page(trial, args.hold)
         elif args.place_only:
             trial.phase("confirm the flat released patch remains secure", 1.50)
     summary = {"actions": trial.steps, **score(trial.trace), "final": trial.trace[-1],
                "peak_liner_tension_n": trial.liner_force.tolist(),
-               "peak_adhesive_contact_n": {str(key): val for key, val in trial.pressure_peak.items()}}
+               "liner_releases": trial.liner_releases,
+               "peak_supported_press_n": {str(key): val for key, val in trial.pressure_peak.items()},
+               "burnish_events": {str(key): event for key, event in trial.burnish_events.items()}}
     (args.out / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
     (args.out / "trace.json").write_text(json.dumps(trial.trace, separators=(",", ":")) + "\n")
     np.save(args.out / "actions.npy", np.stack(trial.actions))

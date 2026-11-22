@@ -19,6 +19,7 @@ BOOK_X = .025
 SPINE_Y = -.218
 BOOK_WIDTH = .210
 PAGE_DEPTH = .148
+FREE_EDGE_OVERHANG = .004
 TEAR_START = .082
 FLAP_LENGTH = PAGE_DEPTH - TEAR_START
 PAPER_HALF = .000069
@@ -29,6 +30,7 @@ TAPE_HALF = .010
 TAPE_STEP = .0185
 TAPE_COUNT = 4
 TAPE_THICKNESS = .000055
+LINER_THICKNESS = .000054
 TAPE_TIP = TAPE_Y + TAPE_STEP * TAPE_COUNT
 CAMERAS = {"top_cam": "top", "left_cam": "left", "right_cam": "right",
            "judging_front": "repair_detail"}
@@ -61,7 +63,7 @@ def ink(parent, x, y, width, height, color=".18 .26 .37 1", reverse=False):
 
 
 def add_workbook(world, exclusions):
-    depth = PAGE_DEPTH - .009
+    depth = PAGE_DEPTH - FREE_EDGE_OVERHANG
     for direction, side in ((-1, "back"), (1, "front")):
         y = SPINE_Y + direction * depth / 2
         box(world, "workbook_cover_" + side, (BOOK_X, y, .779 + BOOK_RISE),
@@ -106,8 +108,9 @@ def add_workbook(world, exclusions):
 
 
 def add_tissue(world, exclusions, equality):
-    liner = child(world, "body", "release_liner", pos=num((TAPE_X, TAPE_Y, TAPE_Z - .000125)))
-    box(liner, "silicone_liner", (.0, .026, 0), (.0145, .036, .0001), ".72 .83 .85 1",
+    liner_z = TAPE_Z - (TAPE_THICKNESS + LINER_THICKNESS) / 2
+    liner = child(world, "body", "release_liner", pos=num((TAPE_X, TAPE_Y, liner_z)))
+    box(liner, "silicone_liner", (.0, .026, 0), (.0145, .036, LINER_THICKNESS / 2), ".72 .83 .85 1",
         friction=".30 .001 .0001", solref=".0013 1", solimp=".90 .99 .00012")
     box(world, "clipboard_base", (TAPE_X, TAPE_Y + .02, .779),
         (.036, .046, .018), ".23 .31 .36 1", friction=".47 .001 .0001")
@@ -125,17 +128,24 @@ def add_tissue(world, exclusions, equality):
                   damping=".00017", armature=".00000055")
             child(exclusions, "exclude", f"tissue_neighbours_{i}", body1=f"tissue_{i - 1}", body2=f"tissue_{i}")
         for sign, side in ((1, "left"), (-1, "right")):
-            box(tissue, f"adhesive_{i}_{side}", (sign * TAPE_HALF / 2, TAPE_STEP / 2, 0),
+            name = f"adhesive_{i}_{side}"
+            box(tissue, name, (sign * TAPE_HALF / 2, TAPE_STEP / 2, 0),
                 (TAPE_HALF / 2, TAPE_STEP / 2, TAPE_THICKNESS / 2), ".83 .78 .57 .46", mass=".000020",
                 friction=".52 .001 .0001", solref=".0013 1", solimp=".92 .99 .00012", condim="3",
                 margin=".00012")
+            # The glassine and adhesive sit flush while bonded. The contact
+            # margin used for paper must not preload the liner in tension.
+            child(exclusions, "pair", geom1=name, geom2="silicone_liner", condim="3",
+                  margin="0", gap="0", solref=".0013 1", solimp=".92 .99 .00012",
+                  friction=".30 .30 .001 .0001 .0001")
             # Anchors are set from the coincident observed contact geometry on first bonding.
-            child(equality, "connect", f"patch_{i}_{side}", body1=f"tissue_{i}", body2=f"flap_{side}",
+            paper = "bound_page" if i == 0 else f"flap_{side}"
+            child(equality, "connect", f"patch_{i}_{side}", body1=f"tissue_{i}", body2=paper,
                   anchor=num((sign * .0045, TAPE_STEP / 2, 0.)), active="false",
                   solref=".0017 1", solimp=".95 .995 .00015")
         if i < TAPE_COUNT - 1:
             child(equality, "connect", f"release_bond_{i}", body1=f"tissue_{i}", body2="release_liner",
-                  anchor=num((0., TAPE_STEP / 2, 0.)), solref=".0020 1", solimp=".93 .99 .00012")
+                  anchor=num((0., TAPE_STEP / 2, 0.)), solref=".004 1", solimp=".93 .99 .00012")
         parent = tissue
 
 

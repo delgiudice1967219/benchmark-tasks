@@ -2,17 +2,101 @@
   "engine": "MuJoCo 3.11.0",
   "render": "CPU-only Mesa EGL software",
   "limit": 680,
+  "calibration": {
+    "material": "Neschen filmoplast P, 20 mm wide, on supplied 54 µm glassine liner",
+    "published_liner_pull_rate_mm_per_s": 5.0,
+    "published_liner_range_n": [
+      0.04,
+      0.09
+    ],
+    "liner_threshold_n": 0.065,
+    "simulated_liner_release_events": {
+      "2": {
+        "time_s": 5.8084999999995,
+        "tension_n": 0.06703859539477393
+      },
+      "1": {
+        "time_s": 5.868499999999467,
+        "tension_n": 0.06896993736781756
+      },
+      "0": {
+        "time_s": 6.253499999999254,
+        "tension_n": 0.06525740199425499
+      }
+    },
+    "tool_force_basis": "Engineering line-load proxy from a 2 kg, 45 mm adhesive-test roller and 2 mm fingertip-edge sample",
+    "tool_force_target_n": 0.8720000000000001,
+    "same_region_paper_minimum_n": 0.3,
+    "local_average_interval_s": 0.1,
+    "paper_and_tissue_application_force_measured": false,
+    "simulated_bond_events": {
+      "(0, 'right')": {
+        "time_s": 15.921500000007967,
+        "finger_n": 2.1423949140375775,
+        "paper_n": 0.40447068678909825,
+        "mean_applied_n": 0.8807200000000001,
+        "support_window_s": 0.1
+      },
+      "(1, 'right')": {
+        "time_s": 16.891500000005983,
+        "finger_n": 1.9940750652188632,
+        "paper_n": 1.366835925326038,
+        "mean_applied_n": 0.8757350940710313,
+        "support_window_s": 0.1
+      },
+      "(1, 'left')": {
+        "time_s": 17.89250000000365,
+        "finger_n": 3.1267766114618203,
+        "paper_n": 1.4989032526750306,
+        "mean_applied_n": 0.8802385221575625,
+        "support_window_s": 0.1
+      },
+      "(2, 'right')": {
+        "time_s": 18.895500000001313,
+        "finger_n": 1.9123767257943514,
+        "paper_n": 0.7078030564573401,
+        "mean_applied_n": 0.8724145117325223,
+        "support_window_s": 0.1
+      },
+      "(2, 'left')": {
+        "time_s": 19.88349999999901,
+        "finger_n": 3.604521761804933,
+        "paper_n": 1.31975668361336,
+        "mean_applied_n": 0.8777649292456655,
+        "support_window_s": 0.1
+      },
+      "(3, 'right')": {
+        "time_s": 20.933499999996563,
+        "finger_n": 0.9182136180291522,
+        "paper_n": 0.3874931151853623,
+        "mean_applied_n": 0.8734188664421357,
+        "support_window_s": 0.1
+      },
+      "(3, 'left')": {
+        "time_s": 21.898499999994314,
+        "finger_n": 1.9799218480951484,
+        "paper_n": 0.5024753935780083,
+        "mean_applied_n": 0.8720204491509824,
+        "support_window_s": 0.1
+      }
+    },
+    "scored_seam_width_mm": [
+      0.0,
+      2.0
+    ]
+  },
   "scripted": {
     "score": 1.0,
     "actions": 679,
     "simulated_seconds": 33.95,
     "released_seconds": 2.0,
-    "verified_single_flank_frames": 33,
-    "release_angle_deg": 179.07837349215234,
-    "max_released_gap_mm": 0.5200135060878047,
+    "verified_single_flank_frames": 34,
+    "release_angle_deg": 179.38537262855664,
+    "max_released_gap_mm": 0.5200031675049108,
+    "valid_repair_frames_through_turn": 207,
     "adhesive_contacts": {
       "left": [
-        true,
+        false,
         true,
         true,
         true
@@ -26,97 +110,95 @@
     }
   },
   "controls": {
-    "flat released repair": {
+    "flat": {
       "score": 0.4,
       "actions": 516,
+      "formed_bonds": 7,
+      "remaining_liner_bonds": [
+        false,
+        false,
+        false
+      ],
       "final_contact_n": [
         0.0,
         0.0
       ],
-      "final_angle_deg": -0.092713480687068,
-      "adhesion": {
-        "left": [
-          true,
-          true,
-          true,
-          true
-        ],
-        "right": [
-          true,
-          true,
-          true,
-          true
-        ]
-      }
+      "final_angle_deg": -0.09270964855602927
     },
-    "one-sided tape": {
+    "light": {
+      "score": 0.0,
+      "actions": 516,
+      "formed_bonds": 0,
+      "remaining_liner_bonds": [
+        false,
+        false,
+        false
+      ],
+      "final_contact_n": [
+        0.0,
+        0.0
+      ],
+      "final_angle_deg": -0.09221578914685065
+    },
+    "one-flank": {
       "score": 0.0,
       "actions": 679,
+      "formed_bonds": 2,
+      "remaining_liner_bonds": [
+        false,
+        false,
+        false
+      ],
       "final_contact_n": [
         0.0,
         0.0
       ],
-      "final_angle_deg": 178.3401922624484,
-      "adhesion": {
-        "left": [
-          true,
-          true,
-          true,
-          true
-        ],
-        "right": [
-          false,
-          false,
-          false,
-          false
-        ]
-      }
+      "final_angle_deg": 178.49591575554516
     },
-    "diagonal placement": {
+    "skew": {
       "score": 0.0,
       "actions": 679,
+      "formed_bonds": 2,
+      "remaining_liner_bonds": [
+        false,
+        false,
+        false
+      ],
       "final_contact_n": [
         0.0,
         0.0
       ],
-      "final_angle_deg": 179.0241331046719,
-      "adhesion": {
-        "left": [
-          false,
-          false,
-          true,
-          true
-        ],
-        "right": [
-          false,
-          false,
-          true,
-          true
-        ]
-      }
+      "final_angle_deg": 179.0541358098547
     },
-    "page held by one gripper": {
+    "held": {
       "score": 0.0,
       "actions": 628,
+      "formed_bonds": 7,
+      "remaining_liner_bonds": [
+        false,
+        false,
+        false
+      ],
       "final_contact_n": [
         0.0,
-        3.306778039761183
+        3.406929656404764
       ],
-      "final_angle_deg": 60.00900835450744,
-      "adhesion": {
-        "left": [
-          true,
-          true,
-          true,
-          true
-        ],
-        "right": [
-          true,
-          true,
-          true,
-          true
-        ]
-      }
+      "final_angle_deg": 60.02955213040721
+    },
+    "no-grip": {
+      "score": 0.0,
+      "actions": 151,
+      "formed_bonds": 0,
+      "remaining_liner_bonds": [
+        true,
+        true,
+        false
+      ],
+      "final_contact_n": [
+        0.0,
+        0.0
+      ],
+      "final_angle_deg": -0.0921598353676563
     }
   },
   "offline_policy": {
@@ -138,7 +220,7 @@
       "actions": 2
     },
     "simulated_s": 0.1,
-    "wall_seconds": 0.8993428879766725
+    "wall_seconds": 0.8477951560053043
   },
   "media": {
     "codec_name": "h264",
@@ -148,11 +230,13 @@
     "nb_frames": "679"
   },
   "sha256": {
-    "scripted.mp4": "29ffb4ac8636dc48799352dc31b1cf0be234256721fb7859ffdf1d787368b854",
-    "setup.png": "fb9ac43ddd466840f4e15abad6dde7faa2851352894f76617480acc52c822e93",
-    "scripted-actions.npy": "46590d88e0521d586b3f9d64cb2a38e5f9496b280dea0fc42d00b7a840e94a52"
+    "scripted.mp4": "476d4b2aafa78394e633190afc6c6f46160dae4c19f4c94af2e469b0df25db19",
+    "setup.png": "590dbd179a79db483c64cfe12e226dc7ae0a78e1ea01d789f2c372e0e55b5777",
+    "scripted-actions.npy": "ca4bc0ab147630b5129faf4d41268806a783ec14ad4b6e63eb06a37fee99031d",
+    "dream.mp4": "2af2b18e19a64f8f57e6d6f220c1299bd7f6a4e7cec7471339c361616262b7ca",
+    "dream-actions.npy": "ab3137a41a96db1666d913bd1457fa21f591f43cbd00707fa767464fbc27acaa"
   },
-  "dream_1": {
+  "dream1": {
     "task": "repair-a-torn-workbook-page",
     "instruction": "Repair the torn workbook page and leave it turned over, with the print visible.",
     "planned_actions": 680,
@@ -171,11 +255,6 @@
       "actions": 680
     },
     "simulated_s": 34.0,
-    "wall_seconds": 57.41185082998709,
-    "sha256": {
-      "dream.mp4": "474adb4b4d0fd2897045ffc87a2266df036b6816d4a6610ffff1193f4c1d5287",
-      "actions.npy": "d70d15ad1a3d48170fc6ade01e07f6f7efcc3c290d32495ac5dc032fd2b16b53",
-      "setup.png": "120ff5afc760131a506f4a85c775b58689afded3b2ba24285ccb7041cd497cac"
-    }
+    "wall_seconds": 61.03362449799897
   }
 }

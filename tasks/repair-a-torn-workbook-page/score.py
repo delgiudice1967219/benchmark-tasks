@@ -6,12 +6,14 @@ from scene import HZ, PAGE_DEPTH, TAPE_STEP, TEAR_START
 
 
 ACTION_LIMIT = 680
+SEAM_ROUNDOFF_MM = 1e-9
 
 
 def repaired(frame):
     if any(frame["liner_bonds"]) or max(frame["tear_gap_mm"]) > 2.0:
         return False
-    if min(frame["tear_width_mm"]) < .10:
+    # Signed width is zero when edges meet and negative when they overlap.
+    if min(frame["tear_width_mm"]) < -SEAM_ROUNDOFF_MM:
         return False
     segments = np.asarray(frame["tape_local"])
     # A repair bridges the edges continuously without presenting folded tape over the print.
