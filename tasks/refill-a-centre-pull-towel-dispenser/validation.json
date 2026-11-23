@@ -1,0 +1,38 @@
+{
+  "instruction": "Refill the portable towel dispenser. Leave the cardboard core and one dispensed towel on the table, with the lid shut and the next towel ready to pull.",
+  "action_limit": 3000,
+  "control_hz": 20,
+  "scripted": {
+    "actions": 2876,
+    "score": 1.0,
+    "released_seconds": 3.55,
+    "perforation_tear_simulated_seconds": 135.07,
+    "next_towel_exposed_mm": 64.502,
+    "first_towel_clearance_from_case_mm": 123.93,
+    "cold_replay_identical": true,
+    "video_sha256": "febadf168d0dcf8a96281dfae9ca27be150cf1592146c4769f1088b1ec3d1815",
+    "action_tape_sha256": "4c8bb36b20b0a9cfe39df64f35e7acdc8c396d9d34e1994e3a64221c7ba478a2",
+    "video": {
+      "format": "H.264 YUV420P",
+      "fps": 20,
+      "frames": 2877,
+      "bytes": 10863236
+    }
+  },
+  "hands_off_control": {
+    "actions": 3000,
+    "score": 0.0
+  },
+  "offline_camera_smoke": {
+    "actions": 12,
+    "requests": 0,
+    "status": "complete",
+    "minimum_sampled_view_stdev": {
+      "detail": 51.456,
+      "overhead": 47.931,
+      "left_wrist": 29.337,
+      "right_wrist": 33.324
+    }
+  },
+  "setup_image_sha256": "6eba23347a43956594a5d407c76c22f248b5539efdc4a27131f92d5ca7ab5337"
+}
